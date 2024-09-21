@@ -1,0 +1,124 @@
+
+
+// `            <div class="sm:flex sm:items-start">
+//               <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+//                 <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+//                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+//                 </svg>
+//               </div>
+//               <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+//                 <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Deactivate account</h3>
+//                 <div class="mt-2">
+//                   <p class="text-sm text-gray-500">Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.</p>
+//                 </div>
+//               </div>
+//             </div>
+
+
+//             <button type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Deactivate</button>
+//             <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+//     `
+
+const modal_correct_icon = `
+            <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-200 sm:mx-0 sm:h-10 sm:w-10">
+                <svg class="h-6 w-6 text-green-600"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="oi sl aye">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+                </svg>
+            </div>
+            `;
+const modal_info_icon = `
+            <div class="mx-auto flex flex-shrink-0 items-center justify-center rounded-full sm:mx-0 sm:h-10 sm:w-10">
+                <?xml version="1.0" encoding="utf-8"?>
+                <svg class="h-12 w-12 text-blue-600" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.88px" viewBox="0 0 122.88 122.88" enable-background="new 0 0 122.88 122.88" xml:space="preserve">
+                <g><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M61.44,0c33.926,0,61.44,27.514,61.44,61.44c0,33.926-27.514,61.439-61.44,61.439 C27.513,122.88,0,95.366,0,61.44C0,27.514,27.513,0,61.44,0L61.44,0z M79.42,98.215H43.46v-6.053h6.757v-36.96H43.46v-4.816h16.808 c4.245,0,8.422-0.51,12.549-1.551v43.328h6.604V98.215L79.42,98.215z M63.859,21.078c2.785,0,4.975,0.805,6.571,2.396 c1.579,1.59,2.377,3.771,2.377,6.581c0,2.848-1.358,5.381-4.093,7.601c-2.751,2.22-5.941,3.338-9.577,3.338 c-2.733,0-4.905-0.765-6.569-2.297c-1.665-1.551-2.497-3.556-2.497-6.05c0-3.143,1.358-5.853,4.059-8.152 C56.83,22.219,60.072,21.078,63.859,21.078L63.859,21.078z"/></g>
+                </svg>
+            </div>
+            `;
+const modal_danger_icon = `
+            <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
+            </div>
+            `;
+function showModal() {
+    $("#modal").removeClass('hidden');
+    $('body').addClass('overflow-hidden');
+}
+
+function infoAlert(title,message,button_text="OK") {
+
+
+    $("#modal_upper").html(upperText(modal_info_icon,title,message));
+    $("#modal_lower").html(lowerText(button_text,"blue"));
+
+    showModal();
+}
+
+function correctAlert(title,message,button_text="OK") {
+
+    
+    $("#modal_upper").html(upperText(modal_correct_icon,title,message));
+    $("#modal_lower").html(lowerText(button_text,"green"));
+
+    showModal();
+}
+
+function dangerAlert(title,message,button_text="OK") {
+
+    $("#modal_upper").html(upperText(modal_danger_icon,title,message));
+    $("#modal_lower").html(lowerText(button_text,"red"));
+
+    showModal();
+}
+
+function CustomAlert(title,body,id="modal-button-cancel",button_text="OK") {
+
+    $("#modal-content").removeClass("sm:max-w-lg").addClass("sm:max-w-5xl");
+    $("#modal_upper").html(customUpperText(title,body));
+    $("#modal_lower").html(lowerText(button_text,"blue",id));
+
+    showModal();
+}
+
+function customUpperText(title,body) {
+    return `
+        <div class="sm:flex sm:items-center">
+            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-right">
+                <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">${title}</h3>
+                <div id="modal-body" class="mt-2">
+                    ${body}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function upperText(icon,title,message) {
+    // Check if sm:max-w-lg exists, if not add it
+    if (!$("#modal-content").hasClass("sm:max-w-lg")) {
+        $("#modal-content").addClass("sm:max-w-lg");
+    }
+    
+    // Remove sm:max-w-5xl if it exists
+    $("#modal-content").removeClass("sm:max-w-5xl");
+    return `
+        <div class="sm:flex sm:items-center">
+            ${icon}
+            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+            <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">${title}</h3>
+            <div class="mt-2">
+                <p class="text-sm text-gray-500">${message}</p>
+            </div>
+            </div>
+        </div>
+    `;
+}
+
+function lowerText(button_text,button_color,id="modal-button-cancel") {
+    return `
+        <button id="${id}" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-${button_color}-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-${button_color}-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${button_color}-500 sm:mt-0 sm:w-auto">
+            ${button_text}
+        </button>
+    `;
+}

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="dist/output.css">
+    <!-- js -->
+    <script src="assets/js/converter.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.js" type="text/javascript"></script>
+    <script src="assets/js/tinycolor-min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="assets/js/html2canvas.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="assets/js/FileSaver.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="assets/js/modal.js" charset="utf-8" type="text/javascript"></script>
+    <script src="main.js" charset="utf-8" type="text/javascript"></script>
+    
+</head>
+
+<body>
+  <div style="line-height: normal !important;">
+    <div id="modal" class="relative z-30 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="false"></div>
+    
+      <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div id="coverBG" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+
+          <div id="modal-content" class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-fit sm:max-w-lg">
+            <div id="modal_upper" class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            </div>
+            <div id="modal_lower" class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+      <div id="header" class="sticky top-0 z-10">
+        <!-- TODO: Sticky all is in top you need -->
+        <nav class="drop-shadow-lg shadow-md" style="background-color: #263365;">
+            <div class="mx-auto px-2 sm:px-6 lg:px-8">
+              <div class="relative flex h-14 items-center justify-between">
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                  <!-- Mobile menu button-->
+                  <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                    <span class="absolute -inset-0.5"></span>
+                    <span class="sr-only">Open main menu</span>
+                    <!--
+                      Icon when menu is closed.
+          
+                      Menu open: "hidden", Menu closed: "block"
+                    -->
+                    <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                    <!--
+                      Icon when menu is open.
+          
+                      Menu open: "block", Menu closed: "hidden"
+                    -->
+                    <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start" style="direction: rtl;">
+                  <div class="flex flex-shrink-0 items-center px-32">
+                    <img class="h-10 w-auto" src="/assets/images/logo.png" alt="Your Company">
+                  </div>
+                <div class="flex flex-1 items-center justify-end">
+                  <button id="side-menu-btn" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                    <span class="absolute -inset-0.5"></span>
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                    <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+      </div>
+      <div id="avalible" class="flex flex-row-reverse">
+        <!-- right section -->
+          <div class="w-full max-w-[25rem]">
+        <div class="h-24 sticky top-14">
+          <div dir="rtl" class="flex h-lvh border-[#1F294F] sticky top-14 flex-col bg-white bg-clip-border text-gray-700 shadow-xl shadow-blue-gray-900/5" style="border-left-width: 0.45vw;">
+            
+            <div class="top-14 sticky z-10 drop-shadow-lg shadow-md">
+              <div class="text-lg font-semibold text-center text-white bg-[#1F294F] p-3" dir="ltr">
+                <svg class="inline-block h-6 w-6 mb-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6 -3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                عدد الساعات: <span id="total-credit-hours">0</span>
+              </div>
+              
+              <div class="tertColor p-2 border-b-8 border-[#1F294F]" style="border-bottom-width: 0.45vw;">
+                <h3 class="text-lg font-semibold mb-2 text-center text-white">اختر أيام الراحة</h3>
+                <div class="flex flex-row-reverse bg-slate-400 w-full h-14 rounded mb-2" dir="ltr">
+                  <div id="days-filter" value="1" class="w-1/5 flex justify-center items-center rounded bg-gray-200 m-2 cursor-pointer  active:bg-gray-400">الأحد</div>
+                  <div id="days-filter" value="2" class="w-1/5 flex justify-center items-center rounded bg-gray-200 m-2 cursor-pointer  active:bg-gray-400">الاثنين</div>
+                  <div id="days-filter" value="3" class="w-1/5 flex justify-center items-center rounded bg-gray-200 m-2 cursor-pointer  active:bg-gray-400">الثلاثاء</div>
+                  <div id="days-filter" value="4" class="w-1/5 flex justify-center items-center rounded bg-gray-200 m-2 cursor-pointer  active:bg-gray-400">الأربعاء</div>
+                  <div id="days-filter" value="5" class="w-1/5 flex justify-center items-center rounded bg-gray-200 m-2 cursor-pointer  active:bg-gray-400">الخميس</div>
+                </div>
+                <div>
+                  <select id="locations" class="w-full px-3 py-2 border rounded-md appearance-none bg-no-repeat bg-right px-2" dir="rtl" lang="ar" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%2F%3E%3C%2Fsvg%3E'); background-position: left 0.5rem center; background-size: 1.5em 1.5em;">
+                    <option value="all">عرض الكل</option>
+                  </select>
+                </div>
+                <div class="my-2" dir="ltr">
+                  <button id="save-timetable" class="w-full font-semibold px-4 py-2 bg-[#FFC700] text-gray-700 rounded-md hover:bg-[#E6B400] focus:outline-none focus:ring-2 focus:ring-[#FFC700] focus:ring-opacity-50 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M17 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-3 14H7v-2h7v2zm0-4H7v-2h7v2zm0-4H7V7h7v2z"/>
+                    </svg>
+                    حفظ الجدول
+                  </button>
+                </div>
+                <div class="my-2" dir="ltr">
+                  <button id="show-sections" class="w-full font-semibold px-4 py-2 bg-[#FFC700] text-gray-700 rounded-md hover:bg-[#E6B400] focus:outline-none focus:ring-2 focus:ring-[#FFC700] focus:ring-opacity-50 flex items-center justify-center">
+                    عرض الشعب
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="p-2 overflow-auto pb-11">
+              <ul id="available-list" role="list" class="divide-y divide-gray-100" style="direction: rtl;">
+
+                <!-- <li class="pb-5">
+                  <div>
+                    <div class="course select-none" index="154">
+                      <p> مشروع تخرج (1) </p>
+                    </div>
+                    <div class="flex min-w-0 gap-x-1 flex-wrap justify-center">
+                      
+                    <div id="154" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(128, 128, 128);">
+                      <p>نظري</p>
+                      <p>471</p>
+                      <p>لم يحدد من الكلية</p>
+                    </div>
+                  
+                    <div id="155" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(51, 102, 85);">
+                      <p>نظري</p>
+                      <p>472</p>
+                      <p>لم يحدد من الكلية</p>
+                    </div>
+                  
+                    <div id="156" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(25, 102, 25);">
+                      <p>نظري</p>
+                      <p>473</p>
+                      <p>لم يحدد من الكلية</p>
+                    </div>
+                  
+                    <div id="157" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(53, 45, 103);">
+                      <p>نظري</p>
+                      <p>474</p>
+                      <p>لم يحدد من الكلية</p>
+                    </div>
+                  
+                    <div id="158" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(84, 84, 84);">
+                      <p>نظري</p>
+                      <p>475</p>
+                      <p>لم يحدد من الكلية</p>
+                    </div>
+                  
+                    <div id="159" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(73, 56, 109);">
+                      <p>نظري</p>
+                      <p>476</p>
+                      <p>لم يحدد من الكلية</p>
+                    </div>
+                  
+                    <div id="160" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(47, 79, 80);">
+                      <p>نظري</p>
+                      <p>477</p>
+                      <p>لم يحدد من الكلية</p>
+                    </div>
+                  
+                    <div id="161" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(128, 128, 128);">
+                      <p>نظري</p>
+                      <p>478</p>
+                      <p>عبدالعزيز صالح على الدريبى</p>
+                    </div>
+                  
+                    <div id="162" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(84, 84, 84);">
+                      <p>نظري</p>
+                      <p>479</p>
+                      <p>سليمان عمرو سليمان العمرو</p>
+                    </div>
+                  
+                    <div id="163" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(128, 128, 128);">
+                      <p>نظري</p>
+                      <p>480</p>
+                      <p>فتحي نور الدين الفقي .</p>
+                    </div>
+                  
+                    <div id="164" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(51, 102, 85);">
+                      <p>نظري</p>
+                      <p>481</p>
+                      <p>ابراهيم سليمان ابراهيم السكيتى</p>
+                    </div>
+                  
+                    <div id="165" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(69, 21, 113);">
+                      <p>نظري</p>
+                      <p>482</p>
+                      <p>محمد عبدالله حسن الهاجرى</p>
+                    </div>
+                  
+                    <div id="166" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(84, 84, 84);">
+                      <p>نظري</p>
+                      <p>483</p>
+                      <p>محمد علي  مارتوزا</p>
+                    </div>
+                  
+                    <div id="167" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(16, 89, 85);">
+                      <p>نظري</p>
+                      <p>484</p>
+                      <p>عبدالله عبدالرحمن فهد العبداللطيف</p>
+                    </div>
+                  
+                    <div id="168" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(61, 52, 119);">
+                      <p>نظري</p>
+                      <p>485</p>
+                      <p>سليمان عمرو سليمان العمرو</p>
+                    </div>
+                  
+                    <div id="169" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(0, 95, 127);">
+                      <p>نظري</p>
+                      <p>486</p>
+                      <p>ابراهيم سليمان ابراهيم السكيتى</p>
+                    </div>
+                  
+                    <div id="170" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(88, 112, 115);">
+                      <p>نظري</p>
+                      <p>487</p>
+                      <p>خليل حمدى عطيه الشقيرات</p>
+                    </div>
+                  
+                    <div id="171" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(32, 112, 104);">
+                      <p>نظري</p>
+                      <p>488</p>
+                      <p>علي بن عبدالرزاق بن مراد</p>
+                    </div>
+                  
+                    <div id="172" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(67, 103, 118);">
+                      <p>نظري</p>
+                      <p>489</p>
+                      <p>عبدالعزيز صالح على الدريبى</p>
+                    </div>
+                  
+                    <div id="173" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(73, 56, 109);">
+                      <p>نظري</p>
+                      <p>490</p>
+                      <p>محمد عبدالرحمن على السحيبانى</p>
+                    </div>
+                  
+                    <div id="174" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(53, 45, 103);">
+                      <p>نظري</p>
+                      <p>896</p>
+                      <p>تميم خليفه سليمان الخليفه</p>
+                    </div>
+                  
+                    </div>
+                  </div>
+                </li> -->
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+          <!-- left section -->
+          <div class="flex flex-col w-full">
+            <div class="sticky top-14" style="z-index: 3;">
+
+              
+              <div id="coruse-section" class="max-h-52 w-full overflow-x-auto animation-slideDown">
+                <ul class="h-52 max-h-52 overflow-x-auto" role="list" style="background-color: #DBE2EF;">
+                  <div class="m-2">
+                    <input type="text" id="course-search" placeholder="ابحث عن المقررات..." class="w-full px-3 py-2 border rounded-md" dir="rtl" lang="ar">
+                  </div>
+                    <li>
+                      <div id="available-courses" class="flex min-w-0 gap-x-2 flex-wrap justify-center">
+
+                      </div>
+                    </li>
+                </ul>
+              </div>
+              <div class="toggle-btn toggle-section flex justify-center items-center cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3.293 14.707a1 1 0 001.414 0L10 9.414l5.293 5.293a1 1 0 001.414-1.414l-6-6a1 1 0 00-1.414 0l-6 6a1 1 0 000 1.414z" clip-rule="evenodd" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Table View -->
+            <div id ="timetable">
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full sm:px-6 lg:px-8">
+                      <div class="overflow-hidden">
+
+                        <table class="min-w-full text-center text-sm font-light text-surface ">
+                          <thead
+                            class="border-b border-neutral-200 bg-neutral-50 font-medium dark:border-white/10 dark:text-neutral-800">
+                            <tr style="z-index: 2;">
+                              <th scope="col" class="px-6 py-4 w-60">الخميس</th>
+                              <th scope="col" class="px-6 py-4 w-60">الإربعاء</th>
+                              <th scope="col" class="px-6 py-4 w-60">الثلاثاء</th>
+                              <th scope="col" class="px-6 py-4 w-60">الإثنين</th>
+                              <th scope="col" class="px-6 py-4 w-60">الأحد</th>
+                              <th scope="col" class="px-6 py-4 w-60">الوقت</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="days">
+                              <td id="day5">
+
+                              </td>
+                              <td id="day4">
+
+                              </td>
+                              <td id="day3">
+
+                              </td>
+                              <td id="day2">
+                              </td>
+                              <td id="day1">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <!-- <div class="flex justify-center">
+            <span class="rounded mt-1 pl-2" dir="rtl" style="background-color: rgba(255, 255, 255,0.5);">
+              <svg class="text-black inline-block h-5 w-5 mb-0 bg-slate-300 rounded-br rounded-tr" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><defs>
+                <style>.a{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width: 1;}</style>
+                </defs>
+                <rect class="a" x="4.5" y="8.4" width="39" height="31.2" rx="2"/>
+                <rect class="a" x="8.5" y="12.4" width="31" height="23.2" rx="1"/>
+                <path class="a" d="M25.84,19a2.6,2.6,0,0,0-3.68,0l0,0a2.61,2.61,0,1,0,4.46,1.86A2.54,2.54,0,0,0,25.82,19Z"/>
+                <path class="a" d="M22,25.53h4a3,3,0,0,1,3,3v1.21a0,0,0,0,1,0,0H19a0,0,0,0,1,0,0V28.53A3,3,0,0,1,22,25.53Z"/>
+                <path class="a" d="M17.42,21.47a2,2,0,0,0-2.84,0l0,0A2,2,0,1,0,18,22.91a2,2,0,0,0-.6-1.43Z"/>
+                <path class="a" d="M19.34,27.14a2,2,0,0,0-1.47-.65H14.13a2,2,0,0,0-2,2v1.25H19"/>
+                <path class="a" d="M33.42,21.47a2,2,0,0,0-2.84,0l0,0A2,2,0,1,0,34,22.91a2,2,0,0,0-.6-1.43Z"/>
+                <path class="a" d="M29,29.74h6.86V28.49a2,2,0,0,0-2-2H30.13a2,2,0,0,0-1.47.65"/>
+              </svg>
+              [ 370 ]
+            </span>
+        </div>         -->
+
+          <!-- side menu -->
+
+          <div id="side-menu" class="hidden w-full max-w-[20rem]">
+            <div class="h-24 sticky top-14">
+          <div dir="rtl" style="border-right-width: 0.45vw;" class=" shadow border-r-8 border-gray-800 overflow-auto h-lvh sticky top-14 w-full max-w-[20rem] flex-col bg-white bg-clip-border p-4 text-gray-700 shadow-blue-gray-900/5">
+          <div class="avatar-container flex justify-center items-center mb-4">
+            <div class="rounded-full border shadow">
+              <img src="assets/images/logo.png" alt="Avatar" class="h-36 w-36 object-contain p-4">
+            </div>
+          </div>
+          <div class="settings-container w-full">
+            <h2 class="text-xl font-semibold mb-4 text-center">الإعدادات</h2>
+            <div class="mb-4">
+              <label for="theme-select" class="block text-sm font-medium text-gray-700 mb-2">اختر النمط:</label>
+              <select id="theme-select" class="w-full px-3 py-2 border rounded-md appearance-none bg-no-repeat bg-right px-2" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%2F%3E%3C%2Fsvg%3E'); background-position: left 0.5rem center; background-size: 1.5em 1.5em;">
+                <option value="light">فاتح</option>
+                <option value="dark">داكن</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label for="language-select" class="block text-sm font-medium text-gray-700 mb-2"><bdi>اللغة:</bdi></label>
+              <select id="language-select" class="w-full px-3 py-2 border rounded-md appearance-none bg-no-repeat bg-right px-2" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%2F%3E%3C%2Fsvg%3E'); background-position: left 0.5rem center; background-size: 1.5em 1.5em;">
+                <option value="ar">العربية</option>
+                <option value="en">English</option>
+              </select>
+            </div>
+            <button id="save-settings" class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+              حفظ الإعدادات
+            </button>
+          </div>
+          <div class="social-media-icons flex justify-center mt-4">
+            <a href="https://github.com/Osama-Alzahrani" target="_blank" class="mx-2">
+              <img src="assets/images/Social/github-48.png" alt="Github" class="h-8 w-8">
+            </a>
+            <a href="https://www.linkedin.com/in/osama-alzahrani" target="_blank" class="mx-2">
+              <img src="assets/images/Social/linkedin-48.png" alt="Twitter" class="h-8 w-8">
+            </a>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

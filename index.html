@@ -20,6 +20,30 @@
     <script src="main.js" charset="utf-8" type="text/javascript"></script>
     
 </head>
+<style>
+      @keyframes slideIn {
+        from { 
+          opacity: 0;
+          transform: translateY(-20px); 
+
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+    }
+    @keyframes slideOut {
+        from { 
+          opacity: 1;
+          transform: translateY(0);
+          
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-20px); 
+        }
+    }
+</style>
 
 <body>
   <div style="line-height: normal !important;">
@@ -32,7 +56,7 @@
           <div id="modal-content" class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-fit sm:max-w-lg">
             <div id="modal_upper" class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
             </div>
-            <div id="modal_lower" class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            <div id="modal_lower" class="bg-gray-50 px-4 py-3 gap-x-4 sm:flex sm:flex-row-reverse sm:px-6">
             </div>
           </div>
 
@@ -69,7 +93,7 @@
                 </div>
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start" style="direction: rtl;">
                   <div class="flex flex-shrink-0 items-center px-32">
-                    <img class="h-10 w-auto" src="/assets/images/logo.png" alt="Your Company">
+                    <img class="h-10 w-auto" src="/assets/images/logo.svg" alt="Your Company">
                   </div>
                 <div class="flex flex-1 items-center justify-end">
                   <button id="side-menu-btn" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
@@ -92,7 +116,7 @@
         <!-- right section -->
           <div class="w-full max-w-[25rem]">
         <div class="h-24 sticky top-14">
-          <div dir="rtl" class="flex h-lvh border-[#1F294F] sticky top-14 flex-col bg-white bg-clip-border text-gray-700 shadow-xl shadow-blue-gray-900/5" style="border-left-width: 0.45vw;">
+          <div dir="rtl" class="flex h-lvh border-[#1F294F] sticky top-14 flex-col bg-clip-border text-gray-700 shadow-xl shadow-blue-gray-900/5" style="border-left-width: 0.45vw;">
             
             <div class="top-14 sticky z-10 drop-shadow-lg shadow-md">
               <div class="text-lg font-semibold text-center text-white bg-[#1F294F] p-3" dir="ltr">
@@ -112,7 +136,7 @@
                   <div id="days-filter" value="5" class="w-1/5 flex justify-center items-center rounded bg-gray-200 m-2 cursor-pointer  active:bg-gray-400">الخميس</div>
                 </div>
                 <div>
-                  <select id="locations" class="w-full px-3 py-2 border rounded-md appearance-none bg-no-repeat bg-right px-2" dir="rtl" lang="ar" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%2F%3E%3C%2Fsvg%3E'); background-position: left 0.5rem center; background-size: 1.5em 1.5em;">
+                  <select id="locations" class="w-full p-2 drop-menu" dir="rtl" lang="ar">
                     <option value="all">عرض الكل</option>
                   </select>
                 </div>
@@ -122,6 +146,11 @@
                       <path d="M17 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-3 14H7v-2h7v2zm0-4H7v-2h7v2zm0-4H7V7h7v2z"/>
                     </svg>
                     حفظ الجدول
+                  </button>
+                </div>
+                <div class="my-2" dir="ltr">
+                  <button id="show-exams" class="w-full font-semibold px-4 py-2 bg-[#FFC700] text-gray-700 rounded-md hover:bg-[#E6B400] focus:outline-none focus:ring-2 focus:ring-[#FFC700] focus:ring-opacity-50 flex items-center justify-center">
+                    جدول الإختبارات
                   </button>
                 </div>
                 <div class="my-2" dir="ltr">
@@ -285,7 +314,13 @@
               <div id="coruse-section" class="max-h-52 w-full overflow-x-auto animation-slideDown">
                 <ul class="h-52 max-h-52 overflow-x-auto" role="list" style="background-color: #DBE2EF;">
                   <div class="m-2">
-                    <input type="text" id="course-search" placeholder="ابحث عن المقررات..." class="w-full px-3 py-2 border rounded-md" dir="rtl" lang="ar">
+                    <div class="relative">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                      </svg>
+                      <input type="text" id="course-search" placeholder="ابحث عن المقررات..." class="w-full px-3 py-2 pr-10 border rounded-md" dir="rtl" lang="ar">
+
+                    </div>
                   </div>
                     <li>
                       <div id="available-courses" class="flex min-w-0 gap-x-2 flex-wrap justify-center">
@@ -303,14 +338,14 @@
 
             <!-- Table View -->
             <div id ="timetable">
-                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class=" sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full sm:px-6 lg:px-8">
-                      <div class="overflow-hidden">
+                      <div class="">
 
-                        <table class="min-w-full text-center text-sm font-light text-surface ">
+                        <table class="min-w-full text-center text-sm font-light text-surface">
                           <thead
-                            class="border-b border-neutral-200 bg-neutral-50 font-medium dark:border-white/10 dark:text-neutral-800">
-                            <tr style="z-index: 2;">
+                            class="sticky myTop border-b border-neutral-200 bg-neutral-50 font-medium dark:border-white/10 dark:text-neutral-800" style="z-index: 2;">
+                            <tr>
                               <th scope="col" class="px-6 py-4 w-60">الخميس</th>
                               <th scope="col" class="px-6 py-4 w-60">الإربعاء</th>
                               <th scope="col" class="px-6 py-4 w-60">الثلاثاء</th>
@@ -319,20 +354,20 @@
                               <th scope="col" class="px-6 py-4 w-60">الوقت</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody class="border-b-[#1F294F]">
                             <tr class="days">
-                              <td id="day5">
+                              <td id="day5" class="relative">
 
                               </td>
-                              <td id="day4">
+                              <td id="day4" class="relative">
 
                               </td>
-                              <td id="day3">
+                              <td id="day3" class="relative">
 
                               </td>
-                              <td id="day2">
+                              <td id="day2" class="relative">
                               </td>
-                              <td id="day1">
+                              <td id="day1" class="relative">
                               </td>
                             </tr>
                           </tbody>
@@ -340,6 +375,8 @@
                       </div>
                     </div>
                 </div>
+                <p id="onlineTitle" dir="rtl" class="px-4 font-semibold" style="display: none;">المواد الإلكترونية: </p>
+                <div id="onlineCourses" class="flex min-w-0 flex-wrap flex-row-reverse gap-x-2 px-2 inline-block"></div>
             </div>
           </div>
 
@@ -362,34 +399,66 @@
         </div>         -->
 
           <!-- side menu -->
-
-          <div id="side-menu" class="hidden w-full max-w-[20rem]">
+          <!-- hidden -->
+          <div id="side-menu" class="w-full max-w-[20rem]">
             <div class="h-24 sticky top-14">
           <div dir="rtl" style="border-right-width: 0.45vw;" class=" shadow border-r-8 border-gray-800 overflow-auto h-lvh sticky top-14 w-full max-w-[20rem] flex-col bg-white bg-clip-border p-4 text-gray-700 shadow-blue-gray-900/5">
           <div class="avatar-container flex justify-center items-center mb-4">
-            <div class="rounded-full border shadow">
-              <img src="assets/images/logo.png" alt="Avatar" class="h-36 w-36 object-contain p-4">
+            <div class="rounded-full border sidebar-logo hover:scale-105 transition">
+              <img src="assets/images/logo.svg" alt="Avatar" class="h-36 w-36 object-contain p-4">
             </div>
           </div>
           <div class="settings-container w-full">
             <h2 class="text-xl font-semibold mb-4 text-center">الإعدادات</h2>
-            <div class="mb-4">
-              <label for="theme-select" class="block text-sm font-medium text-gray-700 mb-2">اختر النمط:</label>
-              <select id="theme-select" class="w-full px-3 py-2 border rounded-md appearance-none bg-no-repeat bg-right px-2" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%2F%3E%3C%2Fsvg%3E'); background-position: left 0.5rem center; background-size: 1.5em 1.5em;">
-                <option value="light">فاتح</option>
-                <option value="dark">داكن</option>
-              </select>
+            <h1 class="horizontal-line my-4"> المظهر </h1>
+            <div class="mb-2 flex justify-between items-center justify-content-center px-10">
+              <label class="ml-2 font-semibold">داكن</label>
+              <input type="checkbox" id="toggle-mode" class="slide-btn">
+              <label class="mr-2 font-semibold">فاتح</label>
             </div>
-            <div class="mb-4">
-              <label for="language-select" class="block text-sm font-medium text-gray-700 mb-2"><bdi>اللغة:</bdi></label>
+            <h1 class="horizontal-line my-4"> الجدول </h1>
+            <div class="mb-2">
+              <!-- <label for="language-select" class="block text-sm font-medium text-gray-700 mb-2"><bdi>اللغة:</bdi></label>
               <select id="language-select" class="w-full px-3 py-2 border rounded-md appearance-none bg-no-repeat bg-right px-2" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%2F%3E%3C%2Fsvg%3E'); background-position: left 0.5rem center; background-size: 1.5em 1.5em;">
                 <option value="ar">العربية</option>
                 <option value="en">English</option>
-              </select>
+              </select> -->
+              <div class="mb-2 flex justify-between items-center justify-content-center px-10">
+                <label class="ml-2 font-semibold text-center">السماح بالتعارضات</label>
+                <input type="checkbox" id="toggle-mode" class="my-toggle-btn">
+              </div>
             </div>
-            <button id="save-settings" class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-              حفظ الإعدادات
-            </button>
+            <h1 class="horizontal-line my-4"> الاختبارات </h1>
+            <div class="mb-2">
+              <div class="mb-2 flex justify-start items-center justify-content-center">
+                <label class="ml-2 font-semibold text-center">عدد الفترات</label>
+                <div class="w-full drop-menu-border">
+                  <select id="numberOfPeriods" class="w-full p-2 drop-menu" dir="rtl" lang="ar">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option selected="selected" value=3>3</option>
+                    <option value=4>4</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-2 flex justify-start items-center justify-content-center">
+                <label class="ml-2 font-semibold text-center">أسابيع الاختبارات</label>
+                <div class="w-full drop-menu-border">
+                  <select class="w-full p-2 drop-menu" dir="rtl" lang="ar">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option selected="selected" value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=4>5</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <button id="settings-save" class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                حفظ الإعدادات
+              </button>
+            </div>
           </div>
           <div class="social-media-icons flex justify-center mt-4">
             <a href="https://github.com/Osama-Alzahrani" target="_blank" class="mx-2">

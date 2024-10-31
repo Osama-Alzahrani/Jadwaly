@@ -1,5 +1,5 @@
 
-
+//TODO: allow to make new modal so you can use more than one modal at time
 // `            <div class="sm:flex sm:items-start">
 //               <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
 //                 <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -18,6 +18,7 @@
 //             <button type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Deactivate</button>
 //             <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
 //     `
+
 
 const modal_correct_icon = `
             <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-200 sm:mx-0 sm:h-10 sm:w-10">
@@ -41,13 +42,37 @@ const modal_danger_icon = `
               </svg>
             </div>
             `;
+
+const Custom_Colors = Object.freeze({
+    BLUE: "blue",
+    GREEN: "green",
+    RED: "red",
+    YELLOW: "[#FFC700] ",
+});
+
+const Custom_btn_ID = Object.freeze({
+    CANCEL: "modal-button-cancel",
+});
 function showModal() {
+    if(darkModeON){
+        $('#modal_upper').addClass("dark");
+        $('#modal_lower').addClass("dark");
+        $('#modal-body').addClass("text-white");
+        $("#modal-title").addClass("text-white");
+        $("#modal-title").next().find('p').addClass("text-white");
+    }else{
+        $('#modal_upper').removeClass("dark");
+        $('#modal_lower').removeClass("dark");
+        $('#modal-body').removeClass("text-white");
+        $("#modal-title").removeClass("text-white");
+        $("#modal-title").next().find('p').removeClass("text-white");
+    }
+
     $("#modal").removeClass('hidden');
     $('body').addClass('overflow-hidden');
 }
 
 function infoAlert(title,message,button_text="OK") {
-
 
     $("#modal_upper").html(upperText(modal_info_icon,title,message));
     $("#modal_lower").html(lowerText(button_text,"blue"));
@@ -72,11 +97,12 @@ function dangerAlert(title,message,button_text="OK") {
     showModal();
 }
 
-function CustomAlert(title,body,id="modal-button-cancel",button_text="OK") {
+function CustomAlert(title,body,custom_buttons=[{text:"OK",id:Custom_btn_ID.CANCEL,color:Custom_Colors.BLUE}]) {
 
     $("#modal-content").removeClass("sm:max-w-lg").addClass("sm:max-w-5xl");
     $("#modal_upper").html(customUpperText(title,body));
-    $("#modal_lower").html(lowerText(button_text,"blue",id));
+    $("#modal_lower").html(customLowerText(custom_buttons));
+
 
     showModal();
 }
@@ -93,6 +119,19 @@ function customUpperText(title,body) {
         </div>
     `;
 }
+
+function customLowerText(custom_buttons) {
+    let body = ""
+    custom_buttons.forEach(btn => {
+        body += `
+            <button id="${btn.id}" type="button" class="mt-3 rounded-md bg-${btn.color}-600 px-8 py-2 font-semibold ${btn.color.includes("[#FFC700]")?"text-gray-700":"text-white"} shadow-sm hover:bg-${btn.color}-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${btn.color}-500 sm:mt-0 sm:w-auto">
+                ${btn.text}
+            </button>
+        `;
+    });
+    return body;
+}
+
 
 function upperText(icon,title,message) {
     // Check if sm:max-w-lg exists, if not add it
@@ -121,4 +160,40 @@ function lowerText(button_text,button_color,id="modal-button-cancel") {
             ${button_text}
         </button>
     `;
+}
+
+
+function newModal(title,body,custom_buttons=[{text:"OK",id:Custom_btn_ID.CANCEL,color:Custom_Colors.BLUE}]){
+    let modal_template = `
+        <div id="temp-modal" class="relative" aria-labelledby="modal-title" role="dialog" aria-modal="true" style="z-index: 40;">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="false"></div>
+        
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div id="coverBG-temp" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+
+            <div id="modal-content-temp" class="relative ${darkModeON? "dark text-white":""} transform overflow-hidden rounded-lg bg-white text-left shadow-xl  transition-all sm:my-8 sm:w-fit sm:max-w-5xl">
+                <div id="modal_upper-temp" class="bg-white ${darkModeON? "dark":""}  px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                </div>
+                <div id="modal_lower-temp" class="bg-gray-50 ${darkModeON? "dark":""} px-4 py-3 gap-x-4 sm:flex sm:flex-row-reverse sm:px-6">
+                </div>
+            </div>
+
+            </div>
+        </div>
+        </div>
+    `
+    $(modal_template).insertBefore("#modal");
+    custom_buttons = custom_buttons.map(btn => ({...btn, id: btn.id + "-temp"}));
+    //CustomAlert(title, body, custom_buttons);
+    $("#modal-content-temp").removeClass("sm:max-w-lg").addClass("sm:max-w-5xl");
+    $("#modal_upper-temp").html(customUpperText(title,body));
+    $('#modal_upper-temp').find('table').each(function() {
+        $( this ).find("thead").children().each(function(){
+          $( this ).find("th").toggleClass("dark:second");
+          $( this ).find("th").toggleClass("text-white");
+          $( this ).find("th").toggleClass("dark:border");
+          $( this ).find("td").toggleClass("dark:border");
+        });
+      });
+    $("#modal_lower-temp").html(customLowerText(custom_buttons));
 }

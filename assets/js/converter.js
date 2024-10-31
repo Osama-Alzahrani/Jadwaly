@@ -48,3 +48,11 @@ function pixelsToVH(pixels) {
 	let vh = pixels * (100 / window.innerHeight);
 	return vh.toFixed(3);
 }
+
+
+// TEXT CONVERTER
+
+    //English to Arabic digits.
+String.prototype.EntoAr= function() {
+	return this.replace(/\d/g, d =>  '٠١٢٣٤٥٦٧٨٩'[d])
+}

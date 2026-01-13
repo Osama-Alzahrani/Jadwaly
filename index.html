@@ -204,7 +204,7 @@
                   <button
                     id="side-menu-btn"
                     type="button"
-                    class="relative inline-flex cursor-pointer items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                    class="relative inline-flex cursor-pointer items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white"
                     aria-controls="mobile-menu"
                     aria-expanded="false"
                   >
@@ -297,7 +297,7 @@
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 text-white"
+                  class="h-5 w-5 text-white transition-all"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -421,7 +421,7 @@
                       <table  class="w-full text-start overflow-hidden">
                         <tr>
                           <td class="px-2 py-1 align-middle">
-                            <label for="font-size" title="تغيير حجم خط الجدول">حجم خط الجدول</label>
+                            <label for="font-size" title="حجم خط الجدول">حجم خط الجدول</label>
                           </td>
                           <td class="px-2 py-1 align-middle flex justify-end">
                             <div class="input-number">
@@ -453,7 +453,7 @@
                         </tr>
                         <tr>
                           <td class="px-2 py-1 align-middle">
-                            <label for="font-size" title="تغيير حجم خط قائمة المقررات المطروحة">حجم خط القائمة الجانبية العلوية</label>
+                            <label for="font-size">حجم خط القائمة الجانبية العلوية</label>
                           </td>
                           <td class="px-2 py-1 align-middle flex justify-end">
                             <div class="input-number">
@@ -469,7 +469,7 @@
                         </tr>
                         <tr>
                           <td class="px-2 py-1 align-middle">
-                            <label for="available-courses-font-size" title="تغيير حجم خط قائمة المقررات المطروحة">حجم خط قائمة المقررات المختارة</label>
+                            <label for="available-courses-font-size" >حجم خط قائمة المقررات المختارة</label>
                           </td>
                           <td class="px-2 py-1 align-middle flex justify-end">
                             <div class="input-number">
@@ -485,7 +485,7 @@
                         </tr>
                         <tr>
                           <td class="px-2 py-1 align-middle">
-                            <label for="available-courses-font-size" title="تغيير حجم خط قائمة المقررات المطروحة">حجم خط جدول الاختبارات</label>
+                            <label for="available-courses-font-size">حجم خط جدول الاختبارات</label>
                           </td>
                           <td class="px-2 py-1 align-middle flex justify-end">
                             <div class="input-number">
@@ -501,7 +501,7 @@
                         </tr>
                         <tr>
                           <td class="px-2 py-1 align-middle">
-                            <label for="available-courses-font-size" title="تغيير حجم خط قائمة المقررات المطروحة">حجم خط جدول الشعب</label>
+                            <label for="available-courses-font-size" >حجم خط جدول الشعب</label>
                           </td>
                           <td class="px-2 py-1 align-middle flex justify-end">
                             <div class="input-number">
@@ -517,7 +517,7 @@
                         </tr>
                         <tr>
                           <td class="px-2 py-1 align-middle">
-                            <label for="available-courses-font-size" title="تغيير حجم خط قائمة المقررات المطروحة">حجم خط تفاصيل الشعب</label>
+                            <label for="available-courses-font-size" >حجم خط تفاصيل الشعب</label>
                           </td>
                           <td class="px-2 py-1 align-middle flex justify-end">
                             <div class="input-number">
@@ -533,13 +533,6 @@
                         </tr>
                       </table>
                     </div>
-                    <!-- <table class="">
-
-
-                      
-                    </table> -->
-
-                    <!-- Table Settings -->
                     <h1 target-toggle="table-settings" hide-toggle="appearance-wrapper" class="horizontal-line my-4 toggle-settings-btn" >الجدول</h1>
                     <div id="table-settings" class="transition-[max-height] duration-250 ease-in-out overflow-hidden">                    
                       <table class="text-start w-full">
@@ -590,21 +583,7 @@
                         </tr>
                       </table>
                     </div>
-                    <!-- <h1 class="horizontal-line my-4">المظهر</h1> -->
-
-                      <!-- <div
-                        class="mb-2 flex justify-between items-center justify-content-center px-10"
-                      >
-  
-                      </div> -->
-
-
                     <div class="mb-2">
-                      <!-- <label for="language-select" class="block text-sm font-medium text-gray-700 mb-2"><bdi>اللغة:</bdi></label>
-                  <select id="language-select" class="w-full px-3 py-2 border rounded-md appearance-none bg-no-repeat bg-right px-2" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%2F%3E%3C%2Fsvg%3E'); background-position: left 0.5rem center; background-size: 1.5em 1.5em;">
-                    <option value="ar">العربية</option>
-                    <option value="en">English</option>
-                  </select> -->
                       <div
                         class="mb-2 flex justify-between items-center justify-content-center px-10"
                       >
@@ -633,79 +612,7 @@
                           </select>
                         </div>
                       </div>
-                      <div id="peroidSelectionLocation" class="mb-2 flex flex-col">
-                        <!-- <div class="mb-2 flex justify-start items-center justify-content-center">
-                      <label class="ml-2 font-semibold text-center">أول فترة</label>
-                      <div class="w-full drop-menu-border">
-                        <select name="0" id="startPeriods" class="w-full p-2 drop-menu" dir="rtl" lang="ar">
-                          <option selected value="8:00">8:00</option>
-                          <option value="8:30">8:30</option>
-                          <option value="9:00">9:00</option>
-                          <option value="9:30">9:30</option>
-                          <option value="10:00">10:00</option>
-                          <option value="10:30">10:30</option>
-                          <option value="11:00">11:00</option>
-                          <option value="11:30">11:30</option>
-                          <option value="12:00">12:00</option>
-                          <option value="12:30">12:30</option>
-                          <option value="1:00">1:00</option>
-                          <option value="1:30">1:30</option>
-                          <option value="2:00">2:00</option>
-                          <option value="2:30">2:30</option>
-                          <option value="3:00">3:00</option>
-                          <option value="3:30">3:30</option>
-                          <option value="4:00">4:00</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="mb-2 flex justify-start items-center justify-content-center">
-                      <label class="ml-2 font-semibold text-center">ثاني فترة</label>
-                      <div class="w-full drop-menu-border">
-                        <select name="1" id="startPeriods" class="w-full p-2 drop-menu" dir="rtl" lang="ar">
-                          <option value="8:00">8:00</option>
-                          <option value="8:30">8:30</option>
-                          <option value="9:00">9:00</option>
-                          <option value="9:30">9:30</option>
-                          <option value="10:00">10:00</option>
-                          <option selected value="10:30">10:30</option>
-                          <option value="11:00">11:00</option>
-                          <option value="11:30">11:30</option>
-                          <option value="12:00">12:00</option>
-                          <option value="12:30">12:30</option>
-                          <option value="1:00">1:00</option>
-                          <option value="1:30">1:30</option>
-                          <option value="2:00">2:00</option>
-                          <option value="2:30">2:30</option>
-                          <option value="3:00">3:00</option>
-                          <option value="3:30">3:30</option>
-                          <option value="4:00">4:00</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="mb-2 flex justify-start items-center justify-content-center">
-                      <label class="ml-2 font-semibold text-center">ثالث فترة</label>
-                      <div class="w-full drop-menu-border">
-                        <select name="2" id="startPeriods" class="w-full p-2 drop-menu" dir="rtl" lang="ar">
-                          <option value="8:00">8:00</option>
-                          <option value="8:30">8:30</option>
-                          <option value="9:00">9:00</option>
-                          <option value="9:30">9:30</option>
-                          <option value="10:00">10:00</option>
-                          <option value="10:30">10:30</option>
-                          <option value="11:00">11:00</option>
-                          <option value="11:30">11:30</option>
-                          <option value="12:00">12:00</option>
-                          <option value="12:30">12:30</option>
-                          <option selected value="1:00">1:00</option>
-                          <option value="1:30">1:30</option>
-                          <option value="2:00">2:00</option>
-                          <option value="2:30">2:30</option>
-                          <option value="3:00">3:00</option>
-                          <option value="3:30">3:30</option>
-                          <option value="4:00">4:00</option>
-                        </select>
-                      </div>
-                    </div> -->
+                      <div id="peroidSelectionLocation" class="mb-2 mt-4 flex flex-col">
                       </div>
                       <div
                         class="flex justify-start items-center justify-content-center"
@@ -729,6 +636,9 @@
                         </div>
                       </div>
                     </div>
+                    <div>
+                      <span class="mt-4 text-center text-gray-400 text-sm">لا تنسَ حفظ التغييرات !</span>
+                    </div>
                     <div class="mt-2">
                       <button
                         id="settings-save"
@@ -746,29 +656,41 @@
                       </button>
                     </div>
                   </div>
-                  <div class="social-media-icons flex justify-center mt-4">
-                    <a
-                      href="https://github.com/Osama-Alzahrani"
-                      target="_blank"
-                      class="mx-2"
-                    >
-                      <img
-                        src="assets/images/Social/github-48.png"
-                        alt="Github"
-                        class="h-8 w-8"
-                      />
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/in/osama-alzahrani"
-                      target="_blank"
-                      class="mx-2"
-                    >
-                      <img
-                        src="assets/images/Social/linkedin-48.png"
-                        alt="Twitter"
-                        class="h-8 w-8"
-                      />
-                    </a>
+                  <div class="bg-[#2d333d] mt-4 rounded-lg shadow-sm py-2">
+                    <div>
+                      <p
+                      class="mt-4 text-center text-gray-300 text-base"
+                      >
+                      صنع بحب <span>❤️</span>... </br>
+                      <span class="text-base">
+                        أسامة الزهراني
+                      </span>
+                    </p>
+                    </div>
+                    <div class="social-media-icons flex justify-center mt-4">
+                      <a
+                        href="https://github.com/Osama-Alzahrani"
+                        target="_blank"
+                        class="mx-2"
+                      >
+                        <img
+                          src="assets/images/Social/github-48.png"
+                          alt="Github"
+                          class="h-8 w-8"
+                        />
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/osama-alzahrani"
+                        target="_blank"
+                        class="mx-2"
+                      >
+                        <img
+                          src="assets/images/Social/linkedin-48.png"
+                          alt="Twitter"
+                          class="h-8 w-8"
+                        />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -813,7 +735,7 @@
                 >
                   <div class="p-3 border-2 border-gray-400 rounded-lg">
                     <h3 class="text-lg font-semibold mb-2 text-center text-white">
-                      اختر أيام الراحة
+                      أيام الأسبوع
                     </h3>
                     <div
                       class="flex flex-row-reverse bg-slate-400 w-full min-h-14 rounded justify-evenly flex-wrap mb-2"
@@ -912,172 +834,13 @@
                 <ul
                   id="available-list"
                   role="list"
-
                   style="direction: rtl; font-size: 15px;"
                 >
-                  <!-- <li class="pb-5">
-                  <div>
-                    <div class="course select-none" index="154">
-                      <p> مشروع تخرج (1) </p>
-                    </div>
-                    <div class="flex min-w-0 gap-x-1 flex-wrap justify-center">
-                      
-                    <div id="154" index="154" class="pt-2 show-hidden available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(128, 128, 128);">
-                      <p>نظري</p>
-                      <p>471</p>
-                      <p>لم يحدد من الكلية</p>
-                    </div>
-                  
-                    <div id="155" index="154" class="pt-2 show-hidden available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(51, 102, 85);">
-                      <p>نظري</p>
-                      <p>472</p>
-                      <p>لم يحدد من الكلية</p>
-                    </div>
-                  
-                    <div id="156" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(25, 102, 25);">
-                      <p>نظري</p>
-                      <p>473</p>
-                      <p>لم يحدد من الكلية</p>
-                    </div>
-                  
-                    <div id="157" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(53, 45, 103);">
-                      <p>نظري</p>
-                      <p>474</p>
-                      <p>لم يحدد من الكلية</p>
-                    </div>
-                  
-                    <div id="158" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(84, 84, 84);">
-                      <p>نظري</p>
-                      <p>475</p>
-                      <p>لم يحدد من الكلية</p>
-                    </div>
-                  
-                    <div id="159" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(73, 56, 109);">
-                      <p>نظري</p>
-                      <p>476</p>
-                      <p>لم يحدد من الكلية</p>
-                    </div>
-                  
-                    <div id="160" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(47, 79, 80);">
-                      <p>نظري</p>
-                      <p>477</p>
-                      <p>لم يحدد من الكلية</p>
-                    </div>
-                  
-                    <div id="161" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(128, 128, 128);">
-                      <p>نظري</p>
-                      <p>478</p>
-                      <p>عبدالعزيز صالح على الدريبى</p>
-                    </div>
-                  
-                    <div id="162" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(84, 84, 84);">
-                      <p>نظري</p>
-                      <p>479</p>
-                      <p>سليمان عمرو سليمان العمرو</p>
-                    </div>
-                  
-                    <div id="163" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(128, 128, 128);">
-                      <p>نظري</p>
-                      <p>480</p>
-                      <p>فتحي نور الدين الفقي .</p>
-                    </div>
-                  
-                    <div id="164" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(51, 102, 85);">
-                      <p>نظري</p>
-                      <p>481</p>
-                      <p>ابراهيم سليمان ابراهيم السكيتى</p>
-                    </div>
-                  
-                    <div id="165" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(69, 21, 113);">
-                      <p>نظري</p>
-                      <p>482</p>
-                      <p>محمد عبدالله حسن الهاجرى</p>
-                    </div>
-                  
-                    <div id="166" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(84, 84, 84);">
-                      <p>نظري</p>
-                      <p>483</p>
-                      <p>محمد علي  مارتوزا</p>
-                    </div>
-                  
-                    <div id="167" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(16, 89, 85);">
-                      <p>نظري</p>
-                      <p>484</p>
-                      <p>عبدالله عبدالرحمن فهد العبداللطيف</p>
-                    </div>
-                  
-                    <div id="168" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(61, 52, 119);">
-                      <p>نظري</p>
-                      <p>485</p>
-                      <p>سليمان عمرو سليمان العمرو</p>
-                    </div>
-                  
-                    <div id="169" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(0, 95, 127);">
-                      <p>نظري</p>
-                      <p>486</p>
-                      <p>ابراهيم سليمان ابراهيم السكيتى</p>
-                    </div>
-                  
-                    <div id="170" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(88, 112, 115);">
-                      <p>نظري</p>
-                      <p>487</p>
-                      <p>خليل حمدى عطيه الشقيرات</p>
-                    </div>
-                  
-                    <div id="171" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(32, 112, 104);">
-                      <p>نظري</p>
-                      <p>488</p>
-                      <p>علي بن عبدالرزاق بن مراد</p>
-                    </div>
-                  
-                    <div id="172" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(67, 103, 118);">
-                      <p>نظري</p>
-                      <p>489</p>
-                      <p>عبدالعزيز صالح على الدريبى</p>
-                    </div>
-                  
-                    <div id="173" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(73, 56, 109);">
-                      <p>نظري</p>
-                      <p>490</p>
-                      <p>محمد عبدالرحمن على السحيبانى</p>
-                    </div>
-                  
-                    <div id="174" index="154" class="pt-2 available-section max-w-28 min-h-20 mt-2 rounded-md opened-section" style="background-color: rgb(53, 45, 103);">
-                      <p>نظري</p>
-                      <p>896</p>
-                      <p>تميم خليفه سليمان الخليفه</p>
-                    </div>
-                  
-                    </div>
-                  </div>
-                </li> -->
                 </ul>
               </div>
             </div>
           </div>
         </div>
-
-
-
-        <!-- <div class="flex justify-center">
-            <span class="rounded mt-1 pl-2" dir="rtl" style="background-color: rgba(255, 255, 255,0.5);">
-              <svg class="text-black inline-block h-5 w-5 mb-0 bg-slate-300 rounded-br rounded-tr" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><defs>
-                <style>.a{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width: 1;}</style>
-                </defs>
-                <rect class="a" x="4.5" y="8.4" width="39" height="31.2" rx="2"/>
-                <rect class="a" x="8.5" y="12.4" width="31" height="23.2" rx="1"/>
-                <path class="a" d="M25.84,19a2.6,2.6,0,0,0-3.68,0l0,0a2.61,2.61,0,1,0,4.46,1.86A2.54,2.54,0,0,0,25.82,19Z"/>
-                <path class="a" d="M22,25.53h4a3,3,0,0,1,3,3v1.21a0,0,0,0,1,0,0H19a0,0,0,0,1,0,0V28.53A3,3,0,0,1,22,25.53Z"/>
-                <path class="a" d="M17.42,21.47a2,2,0,0,0-2.84,0l0,0A2,2,0,1,0,18,22.91a2,2,0,0,0-.6-1.43Z"/>
-                <path class="a" d="M19.34,27.14a2,2,0,0,0-1.47-.65H14.13a2,2,0,0,0-2,2v1.25H19"/>
-                <path class="a" d="M33.42,21.47a2,2,0,0,0-2.84,0l0,0A2,2,0,1,0,34,22.91a2,2,0,0,0-.6-1.43Z"/>
-                <path class="a" d="M29,29.74h6.86V28.49a2,2,0,0,0-2-2H30.13a2,2,0,0,0-1.47.65"/>
-              </svg>
-              [ 370 ]
-            </span>
-        </div>         -->
-
-
       </div>
     </div>
   </body>

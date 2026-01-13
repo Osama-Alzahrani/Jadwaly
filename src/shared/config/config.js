@@ -10,7 +10,7 @@ export const Variables = {
     selectedDays: [],
     daysOfExam: 15,
     examNumberPeriods: 3,
-    maxTimeCode: 900, // 3 pm
+    maxTimeCode: 900,
     oldMaxTime: 900,
     timeCodes: [],
     startPeriods: { 0: "8:00", 1: "10:30", 2: "1:00", 3: "3:30" },
@@ -135,7 +135,7 @@ export function loadSettings() {
     
           if (result.settings.AppearanceSettings){
             let TempAppearanceSettings = result.settings.AppearanceSettings;
-            console.table(TempAppearanceSettings);
+            // console.table(TempAppearanceSettings);
             
             $("#sections-details-font-size").val(TempAppearanceSettings.sectionsDetailsFontSize || 15);
             $("#table-font-size").val(TempAppearanceSettings.tableFontSize || 15);

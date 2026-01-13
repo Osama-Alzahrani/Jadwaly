@@ -11,68 +11,78 @@ import { buildTimetable } from "./src/builder/timetableBuilder.js";
 import { showPopover } from "./src/componenet/popover/popover.js";
 import { darkMode } from "./src/ui/appearance.js";
 import { startTimeBuild } from "./src/builder/examTableBuilder.js";
+import { showExams, copyExams } from "./src/componenet/examTable.js";
 
-// TODO: Done! Make it when click on total-credit-hours show modal with all sections selected with thier creadit hours
-// TODO: Make Padding for cards so it's can show properly
-// TODO: Done! Fix conflict sections border if it more than 2 intrsected section it show only one => it must be reading the Conflictsections insted temp intersectSections variable
 
-// TODO: Done! Add the exam day to the section
-// TODO: Done! Show Only half of the table after that show each hour needed
-// TODO: Done! Show Only half of the table for preview
-// TODO: Done! Work on dark mode option
-// TODO: Done! Fix scrolling effect while previewing the sections
-// TODO: Done! FIX CONFLICT PROBLEM IT ALWAYS CHANGE THE LAST SECTION | :
-// TODO: Done! fix Variables.timeCodes need to fix after delete section its not working properly
-// TODO: Done! check if courses are empty then load the saved one. before that always save the courses
-// TODO: Done! Fix Indexes after check if courses are empty then load the saved one. before that always save the courses
+document.addEventListener("DOMContentLoaded", async () => {
+  let isNewDataFromWebsite = false;
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Request the content from the background page
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "insertContent") {
+  chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+    if (request.action !== "insertContent") return;
 
-      chrome.storage.local.get(["coursesData"], function (result) {
-        if (!result.coursesData) {
-          darkMode();
-          $("#toggle-mode").prop("checked", true);
-          saveSettings();
-          
-          Variables.FirstTimeLoad = true;
-          showTour();
-        }
-      });
-      courseOrganizer(request.content);
+    const { coursesData } = await chrome.storage.local.get(["coursesData"]);
 
-      chrome.storage.local.set({ coursesData: request.content });
+    if (!coursesData) {
+      if (!Variables.darkModeON) {
+        darkMode();
+        $("#toggle-mode").prop("checked", true);
+        saveSettings();
+      }
 
-      console.log(Variables.courses);
-
-      // After receiving the data from the background
-      showAllCourses();
-      //testing();
+      Variables.FirstTimeLoad = true;
+      showTour();
+    } else {
+      console.log("Fresh Data");
+      await chrome.storage.local.remove(["coursesData"]);
     }
+
+    // organize first
+    courseOrganizer(request.content);
+
+    // save after organizing
+    await chrome.storage.local.set({ coursesData: request.content });
+
+    // render AFTER everything is ready
+    showAllCourses();
+
+    isNewDataFromWebsite = true;
   });
+
+  // ---------------------------
+  // PAGE LOAD / RELOAD HANDLING
+  // ---------------------------
+
   const [navigationEntry] = performance.getEntriesByType("navigation");
-  if (navigationEntry && navigationEntry.type === "reload") {
-    console.log("Page is reloaded.");
-    if (Variables.courses.length == 0) {
+
+  if (
+    navigationEntry?.type === "reload" ||
+    !isNewDataFromWebsite
+  ) {
+    if (Variables.courses.length === 0) {
       console.log("Load!!");
 
-      chrome.storage.local.get(["coursesData"], function (result) {
-        courseOrganizer(result.coursesData);
-        console.log(Variables.courses);
+      const { coursesData } = await chrome.storage.local.get(["coursesData"]);
+      if (coursesData) {
+        await courseOrganizer(coursesData);
         showAllCourses();
-      });
+      }
     }
-  } else {
-    console.log("Page is loaded for the first time.");
   }
 
-  // if (FirstTimeLoad){
-    //     showTour();
-    // }
-    
-  });
+  // ---------------------------
+  // SETTINGS LOAD
+  // ---------------------------
+
+  const { settings } = await chrome.storage.local.get(["settings"]);
+
+  if (!settings) {
+    Variables.FirstTimeLoad = true;
+    darkMode();
+    $("#toggle-mode").prop("checked", true);
+    saveSettings();
+    showTour();
+  }
+});
   
   // TODO: Need to Fix or Remove it because now availableCourses are using just indexes
 function init() {
@@ -112,19 +122,26 @@ $(document).ready(function () {
 
   $(document).on("click", "#total-credit-hours-container", function () {
     let rows = '';
+    let totalCreditHours = 0;
 
     Variables.selectedCourses.forEach((course) => {
-      console.log(Variables.courses[course].courseName, Variables.courses[course].creditHours);
+      // console.log(Variables.courses[course].courseName, Variables.courses[course].creditHours);
       rows += `<tr>
                 <th class="border-2 border-black select-text">${Variables.courses[course].courseName}</th>
                 <td class="border-2 border-black select-text">${Variables.courses[course].creditHours}</td>
               </tr>`
+      totalCreditHours += parseInt(Variables.courses[course].creditHours);
     });
+    
+    rows += `<tr>
+                <th class="bg-slate-400 border-2 border-black select-text">المجموع</th>
+                <td class="border-2 border-black select-text bg-slate-400">${totalCreditHours}</td>
+              </tr>`
     
     newModal(
         "",
         `
-        <div class="w-full text-center font-semibold py-2 " style="font-size: 0.9vw;">معلومات المقررات</div>
+        <div class="w-full text-center font-semibold py-2 " style="font-size: 0.9vw;">عدد الساعات</div>
         <div class="flex w-[40rem]">
         <div class="w-full border-2 border-r-0 border-black">
           <table class="w-full text-center" dir="rtl" style="font-size: ${Variables.AppearanceSettings.sectionsDetailsFontSize || 15}px;">
@@ -209,10 +226,10 @@ $(document).ready(function () {
     } else {
       Variables.allowConflict = false;
       Object.values(Variables.intersectSections).some(value => {
-        console.log(value, value.length);
+        // console.log(value, value.length);
         
         return value.some(collide => {
-          console.log(collide.size);
+          // console.log(collide.size);
           
           if (collide.size > 1) {
             message.error("لا يمكنك تعطيل هذا الخيار مع وجود تعارضات في الجدول");
@@ -252,7 +269,7 @@ $(document).ready(function () {
 
   $(document).on("change", "#startPeriods", function () {
     Variables.startPeriods[$(this).attr("name")] = this.value;
-    console.log(Variables.startPeriods);
+    // console.log(Variables.startPeriods);
   });
 
   $(document).on("click", "#settings-save", function () {
@@ -358,7 +375,7 @@ $(document).ready(function () {
     } else {
       Variables.selectedDays.push($(this).attr("value"));
     }
-    console.log($(this).text());
+    // console.log($(this).text());
     $(this).toggleClass("selectedDay");
     filterSelectedCourses();
   });
@@ -396,7 +413,6 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#modal-button-cancel", function () {
-    console.log("Account deactivated");
     hideModal();
   });
 
@@ -405,7 +421,6 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#modal-button-cancel-temp", function () {
-    console.log("Account deactivated");
     delModal();
   });
 
@@ -493,7 +508,7 @@ $(document).ready(function () {
 
     if (!isItCollide()) {
 
-      console.log("NO CONFLICT");
+      // console.log("NO CONFLICT");
       
       // To avoid duplication after selecting a section
       // if ($(this).hasClass("preview-section")) {
@@ -515,7 +530,7 @@ $(document).ready(function () {
         let index = 0;
         Variables.conflictInfo["dayOfConflict"].forEach((elm) => {
           let i = Variables.conflictInfo["index"][index];
-          console.log(elm, index);
+          // console.log(elm, index);
 
           let innerI = 0;
           Variables.intersectSections[elm][i].forEach((secIndex) => {
@@ -523,11 +538,13 @@ $(document).ready(function () {
               `[id='section-${secIndex}'][day='${elm}']`
             ).first();
             $("#" + secIndex).addClass("conflict-section");
+            $("#" + secIndex).attr("title", "يوجد شعبة أخرى تتعارض مع هذه الشعبة تم اختيارها");
             const width = `${80 - innerI * 6}%`;
             thisCard.css("width", width);
             thisCard.css("z-index", innerI);
             thisCard.addClass("conflict-section");
-            console.log(width, thisCard);
+            thisCard.attr("title", "يوجد شعبة أخرى تتعارض مع هذه الشعبة تم اختيارها");
+            // console.log(width, thisCard);
             innerI++;
           });
           index++;
@@ -584,15 +601,7 @@ $(document).ready(function () {
     $("#coruse-section").toggleClass("animation-slideDown");
 
     $(".toggle-btn svg")
-      .toggleClass("rotate-180")
-      .css({
-        transition: "transform 0.5s",
-        transform: function () {
-          return $(this).hasClass("rotate-180")
-            ? "rotate(180deg)"
-            : "rotate(0deg)";
-        },
-      });
+      .toggleClass("rotate-180");
   });
 
   $(document).on("click", ".available-course", function () {
@@ -602,7 +611,7 @@ $(document).ready(function () {
     //console.log(Variables.selectedCourses);
     addSelectedCourse(index);
     updateCreditHours();
-    console.log(Variables.selectedCourses);
+    // console.log(Variables.selectedCourses);
 
     if (!$("#emptyCourses").is(":hidden")){
       $("#emptyCourses").hide();

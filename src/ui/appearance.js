@@ -26,6 +26,7 @@ export function darkMode() {
 
     });
 
+  $("#modal_upper").removeAttr("style");
   $("#side-menu").children().children().toggleClass("dark");
   $("#side-menu").children().children().toggleClass("text-white");
   $("#side-menu").children().children().toggleClass("dark:border");

@@ -125,7 +125,7 @@ export function makeTimetableCard(
           </div>
       
           <!-- Centered content -->
-          <div id="course-overflow-${secIndex}" class="flex flex-col flex-grow justify-center items-center overflow-auto h-full">
+          <div id="course-overflow-${secIndex}" class="flex flex-col justify-center py-8 items-center overflow-auto h-full">
             
             <div class="flex justify-center text-center">
               <bdi class="${
@@ -157,7 +157,7 @@ export function makeTimetableCard(
     )}vw solid ${BorderColor};">
           
           <!-- Centered content -->
-          <div id="course-overflow-${secIndex}" class="flex flex-col flex-grow justify-center items-center overflow-auto h-full">
+          <div id="course-overflow-${secIndex}" class="flex flex-col justify-center py-8 items-center overflow-auto h-full">
             
             <div class="flex justify-center text-center">
               <bdi class="${
@@ -220,7 +220,7 @@ export function previewSection(courseIndex, sectionIndex, style) {
         "preview-"
       )
     );
-    console.log(sectionIndex);
+    // console.log(sectionIndex);
     
     $("#left-section")
       .stop()
@@ -238,7 +238,7 @@ export function previewSection(courseIndex, sectionIndex, style) {
   Variables.timeCodes.sort(function (a, b) {
     return b - a;
   });
-  console.log("This is time table ",Variables.timeCodes);
+  // console.log("This is time table ",Variables.timeCodes);
 }
 
 export function removePreview(course, id) {
@@ -254,7 +254,7 @@ export function addToTimetable(selectedSection) {
   const secIndex = selectedSection["section"];
   const style = selectedSection["color"];
 
-  console.log(selectedSection);
+  // console.log(selectedSection);
 
   const section = Variables.courses[corIndex]["sections"][secIndex];
   if (section["dayOfWeek"].length === 0) {
@@ -331,13 +331,19 @@ export function refreshTable() {
   Variables.selectedSections.forEach((selected) => {
     addToTimetable(selected);
   });
-  console.log(ConflictStyles);
+  // console.log(ConflictStyles);
   
   ConflictStyles.forEach((elm) => {
-    console.log(elm);
+    // console.log(elm);
     if ($(`[id='section-${elm.id}'][day='${elm.day}']`)){
       $(`[id='section-${elm.id}'][day='${elm.day}']`).attr("style", elm.style);
       $(`[id='section-${elm.id}'][day='${elm.day}']`).toggleClass("conflict-section");
+      if ($(`[id='section-${elm.id}'][day='${elm.day}']`).attr("title")) {
+        $(`[id='section-${elm.id}'][day='${elm.day}']`).removeAttr('title');
+      } else {
+        $(`[id='section-${elm.id}'][day='${elm.day}']`).attr("title", "يوجد شعبة أخرى تتعارض مع هذه الشعبة تم اختيارها");
+      }
+
     //   $(`#${elm.id}`).toggleClass("conflict-section");
     }
     // }else{

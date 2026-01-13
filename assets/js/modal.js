@@ -20,6 +20,14 @@ import {Variables} from '../../src/shared/config/config.js';
 //     `
 
 
+const modal_warning_icon = `
+            <div class="mx-auto flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10">
+
+                <svg class="h-8 w-8 text-yellow-500" width="800px" height="800px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"  fill="oklch(82.8% 0.189 84.429)">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.56 1h.88l6.54 12.26-.44.74H1.44L1 13.26 7.56 1zM8 2.28L2.28 13H13.7L8 2.28zM8.625 12v-1h-1.25v1h1.25zm-1.25-2V6h1.25v4h-1.25z"/>
+                </svg>
+            </div>
+            `;
 const modal_correct_icon = `
             <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-200 sm:mx-0 sm:h-10 sm:w-10">
                 <svg class="h-6 w-6 text-green-600"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="oi sl aye">
@@ -92,27 +100,31 @@ export function correctAlert(title,message,button_text="OK") {
 
     
     $("#modal_upper").html(upperText(modal_correct_icon,title,message));
-    $("#modal_lower").html(lowerText(button_text,"green"));
+    $("#modal_lower").html(lowerText(button_text,"green",700));
 
+    showModal();
+}
+export function warningAlert(title=t('modal.warning.title'),message,button_text="OK") {
+
+    
+    $("#modal_upper").html(upperText(modal_warning_icon,title,message));
+    $("#modal_lower").html(lowerText(button_text,"yellow",500));
     showModal();
 }
 
 export function dangerAlert(title,message,button_text="OK") {
 
     $("#modal_upper").html(upperText(modal_danger_icon,title,message));
-    $("#modal_lower").html(lowerText(button_text,"red"));
+    $("#modal_lower").html(lowerText(button_text,"red",700));
 
     showModal();
 }
 
-export function CustomModal(title,body,custom_buttons=[{text:"OK",id:Custom_btn_ID.CANCEL,color:Custom_Colors.BLUE}],skipEmpty=true,emptyMessage="") {
+export function CustomModal(title,body,custom_buttons=[{text:"OK",id:Custom_btn_ID.CANCEL,color:Custom_Colors.BLUE}],isEmpty=true,emptyMessage="") {
 
+    
 
-
-    const tempContainer = $("<div>").html(body);
-    const hasRows = tempContainer.find("table tr").length > 1;
-
-    if(!hasRows && !skipEmpty){
+    if(!isEmpty){
     body = `
             <div class="w-full px-10 py-5 flex gap-2 justify-center items-center text-xl ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
@@ -156,7 +168,7 @@ function customLowerText(custom_buttons) {
     let body = ""
     custom_buttons.forEach(btn => {
         body += `
-            <button id="${btn.id}" type="button" class="mt-3 rounded-md bg-${btn.color}-600 px-8 py-2 font-semibold ${btn.color.includes("[#FFC700]")?"text-gray-700":"text-white"} shadow-sm hover:bg-${btn.color}-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${btn.color}-500 sm:mt-0 sm:w-auto">
+            <button id="${btn.id}" type="button" class="mt-3 rounded-md bg-${btn.color}-600 px-8 py-2 font-semibold ${btn.color.includes("[#FFC700]")?"text-gray-700":"text-white"} shadow-sm hover:bg-${btn.color}-700 transition duration-300 ease-in-out transform hover:scale-105 sm:mt-0 sm:w-auto">
                 ${btn.text}
             </button>
         `;
@@ -186,9 +198,9 @@ function upperText(icon,title,message) {
     `;
 }
 
-function lowerText(button_text,button_color,id="modal-button-cancel") {
+function lowerText(button_text,button_color,button_shade=600,id="modal-button-cancel") {
     return `
-        <button id="${id}" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-${button_color}-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-${button_color}-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${button_color}-500 sm:mt-0 sm:w-auto">
+        <button id="${id}" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-${button_color}-${button_shade} px-8 py-2 text-sm font-semibold ${button_shade <= 300?"text-gray-700":"text-white"} shadow-sm hover:bg-${button_color}-${button_shade} transition duration-300 ease-in-out transform hover:scale-105 sm:mt-0 sm:w-auto">
             ${button_text}
         </button>
     `;

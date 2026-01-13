@@ -6,7 +6,7 @@ function getSectionsTimeUqu(details,codeTimes,days, periods,location,rooms) {
         let split = element.split(" | ");
         split[0] = split[0].slice(0,-1);
         sectionsTime = split[1].split(",");
-        console.log(split);
+        // console.log(split);
         StartTime = getTimes(sectionsTime.at(-1));
         EndTime = getTimes(sectionsTime.at(0));
         start = StartTime.codeTime;

@@ -44,12 +44,12 @@ export function showSections() {
 
     const course = Variables.courses[corIndex];
     const section = Variables.courses[corIndex]["sections"][secIndex];
-    console.log(section);
+    // console.log(section);
     let rooms = [];
     section["room"].forEach((elm, i) => {
       let time = section["time"][i][0];
 
-      console.log(Variables.timeCodes,elm);
+      // console.log(Variables.timeCodes,elm);
       
       if (section["room"].length > 1 && i != section["room"].length - 1) {
         rooms.push(`${time}<br> ${elm}<hr class='pt-2'> `);
@@ -90,13 +90,12 @@ export function showSections() {
   });
 
   const Table = table + tbody.join("");
-
   CustomModal("", Table, [
     { text: "حسنا", id: Custom_btn_ID.CANCEL, color: Custom_Colors.BLUE },
     { text: "نسخ", id: "copy-sections-table", color: Custom_Colors.YELLOW },
     { text: "حفظ", id: "save-sections-table", color: Custom_Colors.YELLOW },
   ],
-  false,
+  tbody.length > 0,
   "لا توجد شعب مسجلة حالياً");
 }
 

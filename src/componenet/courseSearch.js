@@ -1,3 +1,4 @@
+import { Variables } from "../shared/config/config.js";
 
 export function filterCourses(searchTerm) {
   $("#available-courses").empty();
@@ -12,10 +13,10 @@ export function filterCourses(searchTerm) {
             <p>${course["courseCode"]}</p>
         </div>
       `;
-      console.log(index);
+      // console.log(index);
       
       if(Variables.selectedCourses.includes(index.toString())){
-        console.log("GOOD JOB");
+        // console.log("GOOD JOB");
         
       }else{
         $("#available-courses").append(list);

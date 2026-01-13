@@ -1,15 +1,25 @@
 // Create a button element
 const button = document.createElement('button');
-button.innerText = 'التعديل بإستخدام جدولي';
+button.innerText = 'التعديل باستخدام جدولي✨';
 button.type = 'button';
-button.style.padding = '15px';
-button.style.backgroundColor = 'rgb(255 199 0)';
-button.style.color = '#111';
-button.style.border = 'none';
-button.style.borderRadius = '5px';
-button.style.cursor = 'pointer';
-button.style.marginTop = '20px';
-button.style.width = '-webkit-fill-available';
+button.classList.add('cool-btn');
+
+Object.assign(button.style, {
+  padding: '15px 20px',
+  background: 'linear-gradient(135deg, #ffcc00, #ff9f00)',
+  color: '#111',
+  border: 'none',
+  borderRadius: '12px',
+  cursor: 'pointer',
+  marginTop: '20px',
+  width: '-webkit-fill-available',
+  fontSize: '16px',
+  fontWeight: 'bold',
+  boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+  transition: 'all 0.3s ease',
+});
+
+
 
 // Append the button to the body
 
@@ -18,7 +28,7 @@ button.style.width = '-webkit-fill-available';
 
 //     }
 // });
-if($(".uq-title").text().trim() === "المقررات المطروحة")     // TODO: CHEKCED
+if($(".uq-title").text().trim() === "المقررات المطروحة")   
 {
     const tr = document.createElement('div');  // Create a new <tr> element
     table = $("#j_id_1o\\:table .ui-datatable-header")[0];
@@ -33,7 +43,7 @@ if($(".uq-title").text().trim() === "المقررات المطروحة")     // 
     tr.appendChild(button);  // Append the button to the <tr>
    $(tr).insertAfter(table);
 }
-if($(".fontTextTitle").text().trim() === "المقررات المطروحة وفق الخطة")     // TODO: CHEKCED
+if($(".fontTextTitle").text().trim() === "المقررات المطروحة وفق الخطة")   
 {
     const tr = document.createElement('tr');  // Create a new <tr> element
 
@@ -46,7 +56,7 @@ if($(".fontTextTitle").text().trim() === "المقررات المطروحة وف
 function checkUrlType(url) {
     if (url.includes("uqu.edu.sa")) {
         return "uqu";
-    } else if (url.includes("qu.edu.sa")) {
+    } else if (url.includes("qu.edu.sa") || url.includes("qu.edu.sa")) {
         return "qu";
     } else {
         return "other";
@@ -61,6 +71,7 @@ button.addEventListener('click', () => {
   console.log("URL Type:", urlType);
   if (urlType === "uqu"){
     $(button).text("جاري جمع المقررات");
+    $(button).prop('disabled', true);
     $(button).append("<div class='loader' dir='ltr'></div>");
     getUquTable();
   } else if (urlType === "qu"){

@@ -41,8 +41,8 @@ function convertToMinutes(time) {
 
 export function TimeToMinutes(sections) {
   sections.forEach((section) => {
-    start = convertToMinutes(section["period"][0]);
-    end = convertToMinutes(section["period"][1]);
+    const start = convertToMinutes(section["period"][0]);
+    const end = convertToMinutes(section["period"][1]);
     section["codeTime"] = { start: start, end: end };
   });
 }
@@ -66,6 +66,7 @@ export function isOverflowed($element) {
 }
 
 export function captureModalContent(file_Name) {
+  $("#modal_upper")[0].style.setProperty("background-color", getComputedStyle(document.querySelector("#modal_upper")).backgroundColor, "important");
   html2canvas(document.querySelector("#modal_upper"), {
     scale: 2, // Increase resolution (try 2 or 3 for crisper images)
     useCORS: true, // important if there are external images/fonts

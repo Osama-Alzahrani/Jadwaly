@@ -1,17 +1,11 @@
 {
     "manifest_version": 3,
-    "name": "My Table",
+    "name": "Jadwaly",
     "description": "Enable focus mode on Chrome's official Extensions and Chrome Web Store documentation.",
     "version": "0.1.0",
     "permissions": ["tabs", "activeTab","storage"],
     "action": {
-        "default_icon": {
-            "16": "assets/images/icon-16.png",
-            "32": "assets/images/icon-32.png",
-            "48": "assets/images/icon-48.png",
-            "128": "assets/images/icon-128.png"
-        },
-        "default_popup": "popup.html"
+        "default_popup_CO": "popup.html"
     },
     "icons": {
         "16": "assets/images/icon-16.png",
@@ -29,7 +23,8 @@
                 "https://stu-gate.qu.edu.sa/qu/ui/student/offeredCourses/*",
                 "https://stu-gate.qu.edu.sa/qu/ui/student/homeIndex.faces",
                 "https://stu-gate.qu.edu.sa/qu/ui/student/*",
-                "https://eduservices.uqu.edu.sa/ui/students/offered-courses/offered.xhtml"
+                "https://eduservices.uqu.edu.sa/ui/students/offered-courses/offered.xhtml",
+                "https://uqu.edu.sa/*"
             ],
             "js": [
                 "assets/js/jquery.js",

@@ -1,6 +1,9 @@
-import { Custom_btn_ID, Custom_Colors, CustomModal } from "../../assets/js/modal.js";
+import { Custom_btn_ID, Custom_Colors, CustomModal,dangerAlert } from "../../assets/js/modal.js";
 import { buildExamTable } from "../builder/examTableBuilder.js";
 import { Variables } from "../shared/config/config.js";
+import { copyToClipboard } from '../utils/utils.js';
+
+
 
 
 function isItCollideExam(target, name) {
@@ -17,7 +20,7 @@ function isItCollideExam(target, name) {
     return true;
   }
 
-  console.log("Count of this is:" + name + " || " + counter);
+  // console.log("Count of this is:" + name + " || " + counter);
   return false;
 }
 
@@ -127,7 +130,7 @@ export function showExams() {
     const section = Variables.courses[corIndex]["sections"][secIndex];
     const exam = getExamDay(section.examDay);
 
-    console.log(exam);
+    // console.log(exam);
 
     if (
       Variables.sectionsExam.some(
@@ -174,7 +177,9 @@ export function showExams() {
     { text: "حسنا", id: Custom_btn_ID.CANCEL, color: Custom_Colors.BLUE },
     { text: "نسخ", id: "copy-exam-table", color: Custom_Colors.YELLOW },
     { text: "حفظ", id: "save-exam-table", color: Custom_Colors.YELLOW },
-  ]);
+  ],
+  Variables.sectionsExam.length > 0,
+  "لا توجد شعب مسجلة حالياً");
   
   Variables.sectionsExam.forEach((elm) => {
     let text = "";
@@ -183,7 +188,7 @@ export function showExams() {
     } else {
       text = "exam-" + elm.exam.week + "-" + elm.exam.day + "-" + elm.exam.time;
     }
-    console.log(text);
+    // console.log(text);
 
     $("#" + text).html(`
       <div section="${elm.section}" class="overflow-hidden break-words section-router">${elm.id} <br>
@@ -215,7 +220,7 @@ function sortExam() {
   });
 }
 
-function copyExams() {
+export function copyExams() {
   sortExam();
   let prevWeek = "";
   let maxLength = 0;
@@ -227,7 +232,7 @@ function copyExams() {
     }
 
     let text = "";
-    date = getExamText(sec.exam);
+    let date = getExamText(sec.exam);
 
     if (sec.exam.week !== prevWeek) {
       prevWeek = sec.exam.week;
@@ -237,7 +242,7 @@ function copyExams() {
     }
     let textEdited;
 
-    console.log(sec.exam);
+    // console.log(sec.exam);
     if (sec.exam.week == 4) {
       textEdited = `\u202B ${sec.name} - ${
         sec.id
@@ -272,8 +277,8 @@ function copyExams() {
     textToCopy += "\n";
   });
 
-  console.log(textArray);
-  console.log(textToCopy);
+  // console.log(textArray);
+  // console.log(textToCopy);
 
   copyToClipboard(textToCopy);
 }

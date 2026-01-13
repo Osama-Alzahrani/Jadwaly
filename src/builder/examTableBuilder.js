@@ -65,7 +65,7 @@ export function buildExamTable(noExamDay, beforeExamWeek) {
   let tbody = [];
   let beforeExamTable = [];
 
-  console.log(tempStartPeriods);
+  // console.log(tempStartPeriods);
   
 
   let table = `
@@ -210,10 +210,10 @@ export function buildExamTable(noExamDay, beforeExamWeek) {
     `;
     tbody.push(row);
   }
-  console.log(noExamDay);
+  // console.log(noExamDay);
   
   noExamDay.forEach((elm) => {
-    console.log(Variables.courses[elm.id]);
+    // console.log(Variables.courses[elm.id]);
     
     noExamCourses += `<bdi section="${elm.sectionid}"  class="m-1 p-2 section-router bg-slate-400 rounded text-white">${
       Variables.courses[elm.id].courseName

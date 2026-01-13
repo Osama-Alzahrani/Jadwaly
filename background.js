@@ -9,7 +9,13 @@
 let pageContent = '';
 
 
+// chrome.browserAction.onClicked.addListener(function(tab) {
+//     alert('working?');
+// });
+
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+
     if (request.action === 'getContent') {
         let pageContent = request.content;
 
@@ -26,7 +32,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 chrome.action.onClicked.addListener(function(activeTab){
     
-    // chrome.tabs.create({ url: "index.html" });
+    chrome.tabs.create({ url: "index.html" });
     chrome.tabs.sendMessage(activeTab.id, { action: 'getContent' }, (response) => {
         console.log(response.content);
     });

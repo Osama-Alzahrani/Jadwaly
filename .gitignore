@@ -4,3 +4,6 @@ tailwind.config.js
 tailwindcss.exe
 mytext.txt
 backups/
+build/
+old/
+node_modules/

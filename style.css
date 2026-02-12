@@ -39,6 +39,36 @@
     font-weight: 400;
 }
 
+@font-face {
+    font-family: 'HandiCraft';
+    src: url('/assets/fonts/TheYearofHandicrafts-Regular.woff2') format('woff2');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'HandiCraft';
+    src: url('/assets/fonts/TheYearofHandicrafts-Medium.woff2') format('woff2');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'HandiCraft';
+    src: url('/assets/fonts/TheYearofHandicrafts-Bold.woff2') format('woff2');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'HandiCraft';
+    src: url('/assets/fonts/TheYearofHandicrafts-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'HandiCraft';
+    src: url('/assets/fonts/TheYearofHandicrafts-Black.woff2') format('woff2');
+    font-weight: 900;
+}
+
 body{
     line-height: 0.5 !important;
 }
@@ -65,11 +95,11 @@ body{
 
 
 * {
-    font-family: 'IBM Plex' !important;
+    font-family: 'HandiCraft' !important;
     font-style:normal;
     user-select: none;
     font-weight: normal;
-    font-size: 0.75vw;
+    /* font-size: 15px; */
 }
 
 .available-section{
@@ -77,16 +107,23 @@ body{
     background-color: rgb(101, 129, 88);
     text-align: center;
     color: aliceblue;
+
 }
 
 .available-course{
-    background-color: rgb(45, 128, 236);
+    background: linear-gradient(315deg, #0d5394, #0e93ff);
     text-align: center;
     color: aliceblue;
+    border-radius: 0.5rem;
+    box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.1) !important;
 }
 
 .selected{
     display: none;
+}
+
+.selected-section{
+    border: 2.5px solid #E6B400;
 }
 
 .toggle-btn{
@@ -239,6 +276,13 @@ body{
     border-color: #414141!important;
 }
 
+.dark\:modalLower {
+    background-color: #1a2230 !important;
+}
+.dark\:modalUpper {
+    background-color: #161c25 !important;
+}
+
 .slide-btn{
     appearance: none;
     width: 4vw;
@@ -298,7 +342,6 @@ body{
 }
 
 .drop-menu{
-    padding: 20px;
     border-left: 1vw solid transparent !important;
     border-right: 0.3vw solid transparent !important;
     border-radius: 0.3vw;
@@ -316,7 +359,7 @@ body{
 
 h1 {
     position: relative;
-    font-size: 30px;
+    font-size: 20px;
     z-index: 1;
     overflow: hidden;
     text-align: center;
@@ -340,6 +383,33 @@ h1:after {
 }
 .color {
     background-color: #ccc;
+}
+
+.prefix{
+    margin-top: 4px;
+}
+
+.input-number{
+  display: flex;
+  align-items: center;
+  border: 1px solid #a0a0a0;
+  border-radius: 4px;
+  padding: 0.3vw;
+  width: fit-content;
+
+}
+.input-number input{
+  border: none;
+  outline: none;
+  /* width: 3vw; */
+  /* margin-right: 10px; */
+  margin-top: 4px;
+}
+
+.input-number input::-webkit-inner-spin-button,
+.input-number input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
 }
 
 .my-toggle-btn{
@@ -412,3 +482,54 @@ h1:after {
     -ms-border-radius: 0.3vw;
     -o-border-radius: 0.3vw;
 } */
+
+@keyframes slide-fade {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
+.animate-slide-fade {
+    animation: slide-fade 0.6s ease-out forwards;
+}
+
+
+.skipped{
+    border-color: rgb(204, 22, 22) !important;
+}
+
+.hidden-section{
+    border: 2.5px dashed #E6B400 !important;
+    opacity: 0.6;
+    filter: grayscale(100%);
+}
+
+.conflict-section{
+    border: 2.5px dashed #ff0000 !important;
+}
+
+.same-activity-section{
+    border: 4.5px dashed #fbff00 !important;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none; /* Hides the scrollbar, but keeps functionality */
+}
+
+.driver-popover-title, .driver-popover-description {
+    direction: rtl;
+}
+
+.driver-popover-navigation-btns{
+    flex-direction: row-reverse;
+    flex-grow: 0 !important;
+}
+
+.driver-popover-title{
+    margin-top: 10px !important;
+}

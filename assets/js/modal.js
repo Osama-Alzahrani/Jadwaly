@@ -1,4 +1,4 @@
-import {Variables} from '../../src/shared/config/config.js';
+import { Variables } from '../../src/shared/config/config.js';
 //TODO: allow to make new modal so you can use more than one modal at time
 // `            <div class="sm:flex sm:items-start">
 //               <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
@@ -64,19 +64,19 @@ export const Custom_btn_ID = Object.freeze({
 
 
 export function delModal() {
-  $("#temp-modal").remove();
+    $("#temp-modal").remove();
 }
 
 function showModal() {
-    
-    
-    if(Variables.darkModeON){
+
+
+    if (Variables.darkModeON) {
         $('#modal_upper').addClass("dark:modalUpper");
         $('#modal_lower').addClass("dark:modalLower");
         $('#modal-body').addClass("text-white");
         $("#modal-title").addClass("text-white");
         $("#modal-title").next().find('p').addClass("text-white");
-    }else{
+    } else {
         $('#modal_upper').removeClass("dark:modalUpper");
         $('#modal_lower').removeClass("dark:modalLower");
         $('#modal-body').removeClass("text-white");
@@ -88,44 +88,44 @@ function showModal() {
     $('body').addClass('overflow-hidden');
 }
 
-export function infoAlert(title,message,button_text="OK") {
+export function infoAlert(title, message, button_text = "OK") {
 
-    $("#modal_upper").html(upperText(modal_info_icon,title,message));
-    $("#modal_lower").html(lowerText(button_text,"blue"));
-
-    showModal();
-}
-
-export function correctAlert(title,message,button_text="OK") {
-
-    
-    $("#modal_upper").html(upperText(modal_correct_icon,title,message));
-    $("#modal_lower").html(lowerText(button_text,"green",700));
-
-    showModal();
-}
-export function warningAlert(title=t('modal.warning.title'),message,button_text="OK") {
-
-    
-    $("#modal_upper").html(upperText(modal_warning_icon,title,message));
-    $("#modal_lower").html(lowerText(button_text,"yellow",500));
-    showModal();
-}
-
-export function dangerAlert(title,message,button_text="OK") {
-
-    $("#modal_upper").html(upperText(modal_danger_icon,title,message));
-    $("#modal_lower").html(lowerText(button_text,"red",700));
+    $("#modal_upper").html(upperText(modal_info_icon, title, message));
+    $("#modal_lower").html(lowerText(button_text, "blue"));
 
     showModal();
 }
 
-export function CustomModal(title,body,custom_buttons=[{text:"OK",id:Custom_btn_ID.CANCEL,color:Custom_Colors.BLUE}],isEmpty=true,emptyMessage="") {
+export function correctAlert(title, message, button_text = "OK") {
 
-    
 
-    if(!isEmpty){
-    body = `
+    $("#modal_upper").html(upperText(modal_correct_icon, title, message));
+    $("#modal_lower").html(lowerText(button_text, "green", 700));
+
+    showModal();
+}
+export function warningAlert(title = t('modal.warning.title'), message, button_text = "OK") {
+
+
+    $("#modal_upper").html(upperText(modal_warning_icon, title, message));
+    $("#modal_lower").html(lowerText(button_text, "yellow", 500));
+    showModal();
+}
+
+export function dangerAlert(title, message, button_text = "OK") {
+
+    $("#modal_upper").html(upperText(modal_danger_icon, title, message));
+    $("#modal_lower").html(lowerText(button_text, "red", 700));
+
+    showModal();
+}
+
+export function CustomModal(title, body, custom_buttons = [{ text: "OK", id: Custom_btn_ID.CANCEL, color: Custom_Colors.BLUE }], isEmpty = true, emptyMessage = "") {
+
+
+
+    if (!isEmpty) {
+        body = `
             <div class="w-full px-10 py-5 flex gap-2 justify-center items-center text-xl ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
@@ -137,21 +137,21 @@ export function CustomModal(title,body,custom_buttons=[{text:"OK",id:Custom_btn_
             </div>
             `
             ;
-        
-        $("#modal_lower").html(customLowerText([{text:"حسنا",id:Custom_btn_ID.CANCEL,color:Custom_Colors.BLUE}]));
-    }else{
+
+        $("#modal_lower").html(customLowerText([{ text: "حسنا", id: Custom_btn_ID.CANCEL, color: Custom_Colors.BLUE }]));
+    } else {
         $("#modal_lower").html(customLowerText(custom_buttons));
     }
 
     $("#modal-content").removeClass("sm:max-w-lg").addClass("sm:max-w-5xl");
-    $("#modal_upper").html(customUpperText(title,body));
-    
+    $("#modal_upper").html(customUpperText(title, body));
+
 
 
     showModal();
 }
 
-function customUpperText(title,body) {
+function customUpperText(title, body) {
     return `
         <div class="sm:flex sm:items-center">
             <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-right">
@@ -168,7 +168,7 @@ function customLowerText(custom_buttons) {
     let body = ""
     custom_buttons.forEach(btn => {
         body += `
-            <button id="${btn.id}" type="button" class="mt-3 rounded-md bg-${btn.color}-600 px-8 py-2 font-semibold ${btn.color.includes("[#FFC700]")?"text-gray-700":"text-white"} shadow-sm hover:bg-${btn.color}-700 transition duration-300 ease-in-out transform hover:scale-105 sm:mt-0 sm:w-auto">
+            <button id="${btn.id}" type="button" class="mt-3 rounded-md bg-${btn.color}-600 px-8 py-2 font-semibold ${btn.color.includes("[#FFC700]") ? "text-gray-700" : "text-white"} shadow-sm hover:bg-${btn.color}-700 transition duration-300 ease-in-out transform hover:scale-105 sm:mt-0 sm:w-auto">
                 ${btn.text}
             </button>
         `;
@@ -177,12 +177,12 @@ function customLowerText(custom_buttons) {
 }
 
 
-function upperText(icon,title,message) {
+function upperText(icon, title, message) {
     // Check if sm:max-w-lg exists, if not add it
     if (!$("#modal-content").hasClass("sm:max-w-lg")) {
         $("#modal-content").addClass("sm:max-w-lg");
     }
-    
+
     // Remove sm:max-w-5xl if it exists
     $("#modal-content").removeClass("sm:max-w-5xl");
     return `
@@ -198,16 +198,16 @@ function upperText(icon,title,message) {
     `;
 }
 
-function lowerText(button_text,button_color,button_shade=600,id="modal-button-cancel") {
+function lowerText(button_text, button_color, button_shade = 600, id = "modal-button-cancel") {
     return `
-        <button id="${id}" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-${button_color}-${button_shade} px-8 py-2 text-sm font-semibold ${button_shade <= 300?"text-gray-700":"text-white"} shadow-sm hover:bg-${button_color}-${button_shade} transition duration-300 ease-in-out transform hover:scale-105 sm:mt-0 sm:w-auto">
+        <button id="${id}" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-${button_color}-${button_shade} px-8 py-2 text-sm font-semibold ${button_shade <= 300 ? "text-gray-700" : "text-white"} shadow-sm hover:bg-${button_color}-${button_shade} transition duration-300 ease-in-out transform hover:scale-105 sm:mt-0 sm:w-auto">
             ${button_text}
         </button>
     `;
 }
 
 
-export function newModal(title,body,custom_buttons=[{text:"OK",id:Custom_btn_ID.CANCEL,color:Custom_Colors.BLUE}],emptyMessage=""){
+export function newModal(title, body, custom_buttons = [{ text: "OK", id: Custom_btn_ID.CANCEL, color: Custom_Colors.BLUE }], emptyMessage = "") {
     // console.log(Variables.darkModeON);
     let modal_template = `
         <div id="temp-modal" class="relative" aria-labelledby="modal-title" role="dialog" aria-modal="true" style="z-index: 210;">
@@ -216,10 +216,10 @@ export function newModal(title,body,custom_buttons=[{text:"OK",id:Custom_btn_ID.
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div id="coverBG-temp" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
 
-            <div id="modal-content-temp" class="relative ${Variables.darkModeON? "dark text-white":""} transform overflow-hidden rounded-lg bg-white text-left shadow-xl  transition-all sm:my-8 sm:w-fit sm:max-w-5xl">
-                <div id="modal_upper-temp" class="bg-white ${Variables.darkModeON? "dark:modalUpper":""}  px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            <div id="modal-content-temp" class="relative ${Variables.darkModeON ? "dark text-white" : ""} transform overflow-hidden rounded-lg bg-white text-left shadow-xl  transition-all sm:my-8 sm:w-fit sm:max-w-5xl">
+                <div id="modal_upper-temp" class="bg-white ${Variables.darkModeON ? "dark:modalUpper" : ""}  px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                 </div>
-                <div id="modal_lower-temp" class="bg-gray-50 ${Variables.darkModeON? "dark:modalLower":""} px-4 py-3 gap-x-4 sm:flex sm:flex-row-reverse sm:px-6">
+                <div id="modal_lower-temp" class="bg-gray-50 ${Variables.darkModeON ? "dark:modalLower" : ""} px-4 py-3 gap-x-4 sm:flex sm:flex-row-reverse sm:px-6">
                 </div>
             </div>
 
@@ -228,11 +228,11 @@ export function newModal(title,body,custom_buttons=[{text:"OK",id:Custom_btn_ID.
         </div>
     `
     $(modal_template).insertBefore("#modal");
-    custom_buttons = custom_buttons.map(btn => ({...btn, id: btn.id + "-temp"}));
+    custom_buttons = custom_buttons.map(btn => ({ ...btn, id: btn.id + "-temp" }));
     //CustomAlert(title, body, custom_buttons);
     const tempContainer = $("<div>").html(body);
     const hasRows = tempContainer.find("table tr").length > 1;
-    if(!hasRows){
+    if (!hasRows) {
         body = `
                 <div class="w-full px-10 py-5 flex gap-2 justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
@@ -244,25 +244,25 @@ export function newModal(title,body,custom_buttons=[{text:"OK",id:Custom_btn_ID.
 
                 </div>
                 `
-                ;
+            ;
     }
-    
+
     $("#modal-content-temp").removeClass("sm:max-w-lg").addClass("sm:max-w-5xl");
-    $("#modal_upper-temp").html(customUpperText(title,body));
-    $('#modal_upper-temp').find('table').each(function() {
-        $( this ).find("thead").children().each(function(){
-          $( this ).find("th").toggleClass("dark:second");
-          $( this ).find("th").toggleClass("text-white");
-          $( this ).find("th").toggleClass("dark:border");
-          $( this ).find("td").toggleClass("dark:border");
+    $("#modal_upper-temp").html(customUpperText(title, body));
+    $('#modal_upper-temp').find('table').each(function () {
+        $(this).find("thead").children().each(function () {
+            $(this).find("th").toggleClass("dark:second");
+            $(this).find("th").toggleClass("text-white");
+            $(this).find("th").toggleClass("dark:border");
+            $(this).find("td").toggleClass("dark:border");
         });
-      });
+    });
     $("#modal_lower-temp").html(customLowerText(custom_buttons));
 }
 
 export function hideModal() {
-  $("#timetable").removeAttr("style");
-  $("#modal").addClass("hidden");
-  $("body").removeClass("overflow-hidden");
-  $("#image-link").remove();
+    $("#timetable").removeAttr("style");
+    $("#modal").addClass("hidden");
+    $("body").removeClass("overflow-hidden");
+    $("#image-link").remove();
 }

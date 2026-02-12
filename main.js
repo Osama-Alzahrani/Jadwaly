@@ -1,9 +1,9 @@
-import {isOverflowed, captureModalContent, validateAndApplyFontSize} from "./src/utils/utils.js";
-import {correctAlert, hideModal, delModal, newModal, Custom_btn_ID, Custom_Colors} from "./assets/js/modal.js";
+import { isOverflowed, captureModalContent, validateAndApplyFontSize } from "./src/utils/utils.js";
+import { correctAlert, hideModal, delModal, newModal, Custom_btn_ID, Custom_Colors } from "./assets/js/modal.js";
 import { loadSettings, saveSettings, Variables } from "./src/shared/config/config.js";
 import showTour from "./src/guide/driver.js";
-import {courseOrganizer, removeSection, removeSections,filterSelectedCourses, isItCollide, addSelectedCourse,updateCreditHours, showAllCourses} from "./src/logic/coursesManagement.js";
-import {captureTimetable, previewSection,removePreview, addToTimetable, refreshTable} from "./src/logic/timetableManagement.js";
+import { courseOrganizer, removeSection, removeSections, filterSelectedCourses, isItCollide, addSelectedCourse, updateCreditHours, showAllCourses } from "./src/logic/coursesManagement.js";
+import { captureTimetable, previewSection, removePreview, addToTimetable, refreshTable } from "./src/logic/timetableManagement.js";
 import { toggleSideMenu } from "./src/componenet/sidebar.js";
 import { filterCourses } from "./src/componenet/courseSearch.js";
 import { copySections, showSectionDetails, showSections } from "./src/componenet/sectionsTable.js";
@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+
   // ---------------------------
   // SETTINGS LOAD
   // ---------------------------
@@ -83,8 +84,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     showTour();
   }
 });
-  
-  // TODO: Need to Fix or Remove it because now availableCourses are using just indexes
+
+// TODO: Need to Fix or Remove it because now availableCourses are using just indexes
 function init() {
   $('#avalible').split({
     orientation: 'vertical',
@@ -100,13 +101,13 @@ function init() {
       top: "18.5rem",
     },
     500,
-    function () {}
+    function () { }
   );
 
   startTimeBuild($("#numberOfPeriods").val());
 }
 
-function isAvalibleCourses(){
+function isAvalibleCourses() {
   return $("#available-list").children().length > 0;
 }
 
@@ -117,8 +118,8 @@ $(document).ready(function () {
 
 
 
-  
-  
+
+
 
   $(document).on("click", "#total-credit-hours-container", function () {
     let rows = '';
@@ -132,15 +133,15 @@ $(document).ready(function () {
               </tr>`
       totalCreditHours += parseInt(Variables.courses[course].creditHours);
     });
-    
+
     rows += `<tr>
                 <th class="bg-slate-400 border-2 border-black select-text">المجموع</th>
                 <td class="border-2 border-black select-text bg-slate-400">${totalCreditHours}</td>
               </tr>`
-    
+
     newModal(
-        "",
-        `
+      "",
+      `
         <div class="w-full text-center font-semibold py-2 " style="font-size: 0.9vw;">عدد الساعات</div>
         <div class="flex w-[40rem]">
         <div class="w-full border-2 border-r-0 border-black">
@@ -153,46 +154,46 @@ $(document).ready(function () {
           </table>
         </div>
         </div>
-        `,[{text:"حسنا",id:Custom_btn_ID.CANCEL,color:Custom_Colors.BLUE}],"لم يتم إضافة مقررات"
-      );
+        `, [{ text: "حسنا", id: Custom_btn_ID.CANCEL, color: Custom_Colors.BLUE }], "لم يتم إضافة مقررات"
+    );
   });
 
   $(document).on("change", "#cardDesign", function () {
-      let cardDesign = $(this).val();
-      message.success("تم تغيير تصميم البطاقة");
-      Variables.AppearanceSettings.cardDesign = cardDesign;
-      refreshTable();
+    let cardDesign = $(this).val();
+    message.success("تم تغيير تصميم البطاقة");
+    Variables.AppearanceSettings.cardDesign = cardDesign;
+    refreshTable();
   });
 
   $(document).on("change", "#sections-details-font-size", function () {
-    validateAndApplyFontSize(12,22,"sectionsDetailsFontSize",this);
+    validateAndApplyFontSize(12, 22, "sectionsDetailsFontSize", this);
   });
 
   $(document).on("change", "#table-font-size", function () {
-    validateAndApplyFontSize(12,22,"tableFontSize",this,
-    ["timetable-table","onlineTitle","onlineCourses"]);
+    validateAndApplyFontSize(12, 22, "tableFontSize", this,
+      ["timetable-table", "onlineTitle", "onlineCourses"]);
   });
 
   $(document).on("change", "#courses-font-size", function () {
-    validateAndApplyFontSize(12,22,"coursesFontSize",this,
-    ["coruse-section"]);
+    validateAndApplyFontSize(12, 22, "coursesFontSize", this,
+      ["coruse-section"]);
   });
-  
+
   $(document).on("change", "#rightSection-font-size", function () {
-    validateAndApplyFontSize(12,18,"RightSectionFontSize",this,
-    ["right-section-content"]);
+    validateAndApplyFontSize(12, 18, "RightSectionFontSize", this,
+      ["right-section-content"]);
   });
 
   $(document).on("change", "#exam-table-font-size", function () {
-    validateAndApplyFontSize(12,18,"ExamTableFontSize",this);
+    validateAndApplyFontSize(12, 18, "ExamTableFontSize", this);
   });
-  
+
   $(document).on("change", "#sections-table-font-size", function () {
-    validateAndApplyFontSize(12,18,"SectionsTableFontSize",this);
+    validateAndApplyFontSize(12, 18, "SectionsTableFontSize", this);
   });
 
   $(document).on("change", "#available-courses-font-size", function () {
-    validateAndApplyFontSize(12,18,"AvaliableSectionFontSize",this);
+    validateAndApplyFontSize(12, 18, "AvaliableSectionFontSize", this);
   });
 
   $(document).on("change", "#toggle-dynamic-titles", function () {
@@ -207,9 +208,9 @@ $(document).ready(function () {
       });
       Variables.toggleHiddenSections = false;
     }
-    
+
   });
-  
+
   $(document).on("change", "#toggle-same-activity", function () {
     if ($(this).is(":checked")) {
       Variables.allowSameActivity = true;
@@ -227,10 +228,10 @@ $(document).ready(function () {
       Variables.allowConflict = false;
       Object.values(Variables.intersectSections).some(value => {
         // console.log(value, value.length);
-        
+
         return value.some(collide => {
           // console.log(collide.size);
-          
+
           if (collide.size > 1) {
             message.error("لا يمكنك تعطيل هذا الخيار مع وجود تعارضات في الجدول");
             $(this).prop("checked", true);
@@ -241,7 +242,7 @@ $(document).ready(function () {
         });
       });
 
-      
+
     }
   });
 
@@ -287,7 +288,7 @@ $(document).ready(function () {
     target = $(this).attr('target-toggle');
     hideToggle = $(this).attr('hide-toggle');
     const wrapper = document.getElementById(target);
-    
+
 
 
 
@@ -318,7 +319,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#show-sections", function () {
-    $("#modal_lower")[0].style.setProperty("font-size", Variables.AppearanceSettings.SectionsTableFontSize + "px","important");
+    $("#modal_lower")[0].style.setProperty("font-size", Variables.AppearanceSettings.SectionsTableFontSize + "px", "important");
 
     showSections();
   });
@@ -361,6 +362,8 @@ $(document).ready(function () {
   $('.bg-gray-50 button:contains("Cancel")').on("click", hideModal);
 
   $('.bg-gray-50 button:contains("Cancel-temp")').on("click", delModal);
+
+  $('.bg-gray-50 button:contains("Cancel-temp")').on('click', delModal);
 
   // Handle Deactivate button click
   $('.bg-gray-50 button:contains("Deactivate")').on("click", function () {
@@ -470,7 +473,7 @@ $(document).ready(function () {
 
   $(document).on("click", ".available-section", function () {
     //alert($(this).children("p").eq(0).text());
-    
+
     //TODO: Done! Check if there is a section with the same data
     if ($(this).hasClass("hidden-section")) {
       // dangerAlert("خطأ", "هذه الشعبة مخفية من القائمة");
@@ -492,10 +495,10 @@ $(document).ready(function () {
     }
 
     if (!Variables.allowSameActivity)
-    if (Variables.selectedSections.some((sec) => sec.course === $(this).attr("index") && Variables.courses[sec.course].sections[sec.section].type === Variables.courses[sec.course].sections[$(this).attr("id")].type)) {
-      message.error("لا يمكنك اختيار أكثر من شعبة لنفس المقرر بنفس النشاط",5000);
-      return false;
-    }
+      if (Variables.selectedSections.some((sec) => sec.course === $(this).attr("index") && Variables.courses[sec.course].sections[sec.section].type === Variables.courses[sec.course].sections[$(this).attr("id")].type)) {
+        message.error("لا يمكنك اختيار أكثر من شعبة لنفس المقرر بنفس النشاط", 5000);
+        return false;
+      }
 
     // if(checkSectionExists($(this).attr("id"))){
     //   return false;
@@ -509,10 +512,10 @@ $(document).ready(function () {
     if (!isItCollide()) {
 
       // console.log("NO CONFLICT");
-      
+
       // To avoid duplication after selecting a section
       // if ($(this).hasClass("preview-section")) {
-        // removePreview($(this).attr("index"), $(this).attr("id"));
+      // removePreview($(this).attr("index"), $(this).attr("id"));
       // }
       $(this).toggleClass("selected-section");
       addToTimetable(Variables.selectedSections[0]);
@@ -571,7 +574,7 @@ $(document).ready(function () {
     // console.log(selectedSections);
   });
 
-  
+
 
   $(document).on("click", ".toggle-btn", function () {
     const table = $("#timetable").find("thead");
@@ -613,11 +616,11 @@ $(document).ready(function () {
     updateCreditHours();
     // console.log(Variables.selectedCourses);
 
-    if (!$("#emptyCourses").is(":hidden")){
+    if (!$("#emptyCourses").is(":hidden")) {
       $("#emptyCourses").hide();
     }
 
-    
+
   });
 
   $(document).on("click", ".course", function () {
@@ -637,8 +640,8 @@ $(document).ready(function () {
     $(this).closest("li").remove();
     removeSections($(this).attr("index"));
     updateCreditHours();
-    if (!isAvalibleCourses()){
-      if ($("#emptyCourses").is(":hidden")){
+    if (!isAvalibleCourses()) {
+      if ($("#emptyCourses").is(":hidden")) {
         $("#emptyCourses").show();
       }
     }

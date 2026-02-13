@@ -7,3 +7,4 @@ backups/
 build/
 old/
 node_modules/
+package-lock.json

@@ -1,17 +1,19 @@
 {
     "manifest_version": 3,
     "name": "Jadwaly",
-    "description": "Enable focus mode on Chrome's official Extensions and Chrome Web Store documentation.",
+    "description": "إضافة تساعد طلاب الجامعات في بناء جداولهم الدراسية بسهولة من خلال سحب المقررات المطروحة وعرضها بشكل بصري تفاعلي.",
     "version": "0.1.0",
-    "permissions": ["tabs", "activeTab","storage"],
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "storage"
+    ],
     "action": {
-        "default_popup_CO": "popup.html"
-    },
-    "icons": {
-        "16": "assets/images/icon-16.png",
-        "32": "assets/images/icon-32.png",
-        "48": "assets/images/icon-48.png",
-        "128": "assets/images/icon-128.png"
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "assets/images/icon-16.png",
+            "32": "assets/images/icon-32.png"
+        }
     },
     "icons": {
         "16": "assets/images/icon-16.png",
@@ -36,7 +38,9 @@
                 "assets/js/jquery.js",
                 "injection.js"
             ],
-            "css": ["assets/css/injection.css"]
+            "css": [
+                "assets/css/injection.css"
+            ]
         }
     ],
     "content_security_policy": {
@@ -44,8 +48,14 @@
     },
     "web_accessible_resources": [
         {
-            "resources": ["assets/images/*", "dist/*", "assets/js/*"],
-            "matches": ["<all_urls>"]
+            "resources": [
+                "assets/images/*",
+                "dist/*",
+                "assets/js/*"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
         }
     ]
 }

@@ -7,7 +7,7 @@ lang["en"] = {
   "edu1": "Qassim University Website",
   "edu2": "Umm Al-Qura University Website",
   "howToOpen": "You must open the proposed courses page to use the extension"
-};  
+};
 
 lang["ar"] = {
   "headline": "يرجى استخدام الإضافة من خلال صفحة الطالب المواد المطروحة",
@@ -21,9 +21,18 @@ lang["ar"] = {
 
 //==============================================================================
 
-$(document).ready(function() {
+
+function setCurrentYear() {
+  var d = new Date();
+  var year = d.getFullYear();
+  $("#currentYear").text(year);
+}
+
+
+$(document).ready(function () {
   // chrome.tabs.create({ url: "index.html" });
-  $("#langBtn").click(function() {
+  setCurrentYear();
+  $("#langBtn").click(function () {
     // Language change logic here
     if ($("#langBtn").text() === "العربية") {
       $("#langBtn").text("English");
@@ -40,7 +49,6 @@ $(document).ready(function() {
       $("#Title1").text(lang["en"].headline);
       $("#Title2").text(lang["en"].subtext);
       $("#btn-studio").text(lang["en"].editbutton);
-      $("#Title2").text(lang["en"].subtext);
       $("#allowedTitle").text(lang["en"].allowedTitle);
       $("#edu1").text(lang["en"].edu1);
       $("#edu2").text(lang["en"].edu2);
@@ -78,6 +86,8 @@ chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
     "eduservices.uqu.edu.sa",
     "uqu.edu.sa"
   ];
+
+
 
   const isAllowed = allowedSites.some(site =>
     tab.url.includes(site)

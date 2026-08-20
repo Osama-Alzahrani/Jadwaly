@@ -16,12 +16,12 @@ export function darkMode() {
       $children.each(function (i) {
           
           $(this).toggleClass("text-white");
-          if (i === $children.length - 1) {
-            $(this).toggleClass("dark:second");
-            $(this).toggleClass("border");
-          }else{
+          // if (i === $children.length - 1) {
+            // $(this).toggleClass("dark:second");
+            // $(this).toggleClass("border");
+          // }else{
             $(this).toggleClass("dark:border");
-          }
+          // }
         });
 
     });

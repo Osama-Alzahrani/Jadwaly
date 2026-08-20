@@ -1,4 +1,5 @@
 import { startTimeBuild } from "../../builder/examTableBuilder.js";
+import { applyRowHeight, getRowHeight } from "../../builder/timetableBuilder.js";
 import { darkMode } from "../../ui/appearance.js";
 
 export const Variables = {
@@ -62,6 +63,7 @@ export function saveSettings() {
   let tableFontSizeValue = $("#table-font-size").val();
   let coursesFontSizeValue = $("#courses-font-size").val();
   let cardDesignValue = $("#cardDesign").val();
+  let rowHeightValue = getRowHeight();
 
 
 
@@ -84,6 +86,7 @@ export function saveSettings() {
       startPeriods: startPeriodsValue,
       AppearanceSettings: {
         cardDesign: cardDesignValue,
+        rowHeight: rowHeightValue,
         RightSectionFontSize: RightSectionFontSizeValue,
         AvaliableSectionFontSize: AvaliableSectionFontSizeValue,
         ExamTableFontSize: ExamTableFontSizeValue,
@@ -153,8 +156,11 @@ export function loadSettings() {
             Variables.AppearanceSettings.SectionsTableFontSize = TempAppearanceSettings.SectionsTableFontSize;
             Variables.AppearanceSettings.AvaliableSectionFontSize = TempAppearanceSettings.AvaliableSectionFontSize;
             Variables.AppearanceSettings.cardDesign = TempAppearanceSettings.cardDesign;
-    
+            Variables.AppearanceSettings.rowHeight = TempAppearanceSettings.rowHeight;
+
             $("#cardDesign").val(TempAppearanceSettings.cardDesign || "default");
+            $("#row-height").val(getRowHeight());
+            applyRowHeight();
     
             $("#timetable-table")[0].style.setProperty("font-size", Variables.AppearanceSettings.tableFontSize + "px","important");
             $("#onlineTitle")[0].style.setProperty("font-size", Variables.AppearanceSettings.tableFontSize + "px","important");

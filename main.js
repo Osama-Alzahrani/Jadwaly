@@ -1,4 +1,4 @@
-import { isOverflowed, captureModalContent, validateAndApplyFontSize } from "./src/utils/utils.js";
+import { captureModalContent, validateAndApplyFontSize } from "./src/utils/utils.js";
 import { correctAlert, hideModal, delModal, newModal, Custom_btn_ID, Custom_Colors } from "./assets/js/modal.js";
 import { loadSettings, saveSettings, Variables } from "./src/shared/config/config.js";
 import showTour from "./src/guide/driver.js";
@@ -7,7 +7,7 @@ import { captureTimetable, previewSection, removePreview, addToTimetable, refres
 import { toggleSideMenu } from "./src/componenet/sidebar.js";
 import { filterCourses } from "./src/componenet/courseSearch.js";
 import { copySections, showSectionDetails, showSections } from "./src/componenet/sectionsTable.js";
-import { buildTimetable } from "./src/builder/timetableBuilder.js";
+import { buildTimetable, applyRowHeight, getRowHeight } from "./src/builder/timetableBuilder.js";
 import { showPopover } from "./src/componenet/popover/popover.js";
 import { darkMode } from "./src/ui/appearance.js";
 import { startTimeBuild } from "./src/builder/examTableBuilder.js";
@@ -163,6 +163,24 @@ $(document).ready(function () {
     message.success("تم تغيير تصميم البطاقة");
     Variables.AppearanceSettings.cardDesign = cardDesign;
     refreshTable();
+  });
+
+  $(document).on("change", "#row-height", function () {
+    const MIN = 40, MAX = 120;
+    const value = Number($(this).val());
+
+    if (!Number.isFinite(value) || value < MIN || value > MAX) {
+      message.error("قيمة غير صحيحة");
+      $(this).val(getRowHeight());
+      return;
+    }
+
+    Variables.AppearanceSettings.rowHeight = value;
+    // Resize first, then redraw: the cards read the new tbody height on the way through
+    // addToTimetable() and rescale themselves to it.
+    applyRowHeight();
+    refreshTable();
+    message.success("تم تغيير ارتفاع صفوف الجدول");
   });
 
   $(document).on("change", "#sections-details-font-size", function () {
@@ -517,16 +535,9 @@ $(document).ready(function () {
       // removePreview($(this).attr("index"), $(this).attr("id"));
       // }
       $(this).toggleClass("selected-section");
-      addToTimetable(Variables.selectedSections[0]);
-      const sec = $(this).attr("id");
-
-      $("[id=course-overflow-" + sec + "]").each(function () {
-        if (isOverflowed($(this))) {
-          $(this).children().eq(0).children().eq(0).removeClass("sm:px-8");
-          //console.log("Flowed");
-          //console.log(this);
-        }
-      });
+      // addToTimetable() trims the overflowing title itself, so preview and placed
+      // cards stay identical and the trim survives a refreshTable() redraw.
+      addToTimetable(Variables.selectedSections[0], true);
 
       if (Variables.allowConflict && Variables.hasIntersected) {
         let index = 0;

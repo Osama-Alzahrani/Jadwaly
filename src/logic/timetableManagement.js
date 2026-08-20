@@ -1,15 +1,25 @@
 import { CustomModal, Custom_Colors, dangerAlert } from "../../assets/js/modal.js";
 import { Variables } from "../shared/config/config.js";
 import { clearTimetable, removeFromCodeTimes } from "./coursesManagement.js";
+import { isOverflowed } from "../utils/utils.js";
+import { getRowHeight } from "../builder/timetableBuilder.js";
 
+function trimOverflowingTitle(cardId) {
+  $(`[id='${cardId}']`).each(function () {
+    const overflowBox = $(this).find("[id^=course-overflow-]").first();
+    if (overflowBox.length && isOverflowed(overflowBox)) {
+      overflowBox.children().eq(0).children().eq(0).removeClass("sm:px-8");
+    }
+  });
+}
 
 function addTableRow() {
-  let table = $("#timetable").find("table");
+  let table = $("#timetable-table");
   let tbody = table.find("tbody");
   // maxTimeCode = ((maxTimeCode/60) == 22)? 60*23: maxTimeCode;
   for (let i = (Variables.oldMaxTime + 60) / 60; i <= Variables.maxTimeCode / 60; i++) {
     let row = `
-      <tr class="h-16">
+      <tr style="height: ${getRowHeight()}px;">
         <td class="border px-8 whitespace-nowrap ${
           Variables.darkModeON ? "dark:border text-white" : ""
         } px-6 py-4"></td>
@@ -25,8 +35,8 @@ function addTableRow() {
         <td class="border px-8 whitespace-nowrap ${
           Variables.darkModeON ? "dark:border text-white" : ""
         } px-6 py-4"></td>
-        <td class="bg-neutral-50 px-8 whitespace-nowrap ${
-          Variables.darkModeON ? "dark:second text-white" : ""
+        <td class="border px-8 whitespace-nowrap ${
+          Variables.darkModeON ? "dark:border text-white" : ""
         } px-6 py-4">${
       i < 12 ? `${i}:00 ص` : i == 12 ? `${i}:00 م` : `${i - 12}:00 م`
     }</td>
@@ -105,10 +115,10 @@ export function makeTimetableCard(
   if (Variables.AppearanceSettings.cardDesign === "Default" || !Variables.AppearanceSettings.cardDesign) {
     return `
         <div id="${prefix}section-${secIndex}" course="${corIndex}" timeIndex="${indx}" day="${day}" class="overflow-hidden rounded-lg flex flex-col text-start added-section timetable-section" style="height: ${pixelsToVH(
-      endPixel - startPixel
-    )}vh; margin-top: ${pixelsToVH(startPixel)}vh; ${style} border: ${pixelsToVW(
-      5
-    )}vw solid ${BorderColor};">
+          endPixel - startPixel
+        )}vh; margin-top: ${pixelsToVH(startPixel)}vh; ${style} border: ${pixelsToVW(
+          5
+        )}vw solid ${BorderColor};">
           
           <!-- Top section -->
           <div class="w-full">
@@ -178,6 +188,38 @@ export function makeTimetableCard(
           </div>
         </div>
       `;
+  }else if (Variables.AppearanceSettings.cardDesign === "Modern") {
+    return `
+        <div id="${prefix}section-${secIndex}" course="${corIndex}" timeIndex="${indx}" day="${day}" class="overflow-hidden rounded-lg flex flex-col text-start added-section timetable-section" style="height: ${pixelsToVH(
+      endPixel - startPixel
+    )}vh; margin-top: ${pixelsToVH(startPixel)}vh; ${style} border: 0.1vw solid black;">
+
+          <!-- Top section -->
+          <div class="w-full">
+            <div class="flex justify-between text-xs text-white bg-white p-1">
+              <span class="text-center px-1 rounded-sm text-white" style="background-color: ${
+                section.status === "مغلقة" ? "#f03d3d" : "#3D5C3F"
+              };">${section.status}</span>
+              <span class="text-black w-full text-center">${section.id}</span>
+              <span class="text-black rounded-sm px-1 text-center" style="background-color: ${
+                section.type === "عملي" || section.type === "تدريب"
+                  ? "#FFC700"
+                  : "#EEF0F3"
+              };">${section.type}</span>
+            </div>
+          </div>
+
+          <!-- Centered content -->
+          <div id="course-overflow-${secIndex}" class="flex justify-center flex-wrap-reverse text-xs p-1 flex-col overflow-auto h-full">
+            <bdi class="rounded course-title text-sm" style="font-weight: 700;">${
+      Variables.courses[corIndex].courseName
+    }</bdi>
+            <bdi id="sec-time" class="rounded text-xs" style="font-weight: 100;">
+              ${section.time[indx][0]} - ${section.time[indx][1]}
+            </bdi>
+          </div>
+        </div>
+      `;
   }
 }
 
@@ -234,6 +276,8 @@ export function previewSection(courseIndex, sectionIndex, style) {
   });
   // $('html, body').scrollTop($("#preview-section-"+sectionIndex).offset().top);
 
+  trimOverflowingTitle("preview-section-" + sectionIndex);
+
   Variables.timeCodes.push(parseInt(maxValue, 10));
   
   Variables.timeCodes.sort(function (a, b) {
@@ -248,7 +292,7 @@ export function removePreview(course, id) {
   // console.log(course);
 }
 
-export function addToTimetable(selectedSection) {
+export function addToTimetable(selectedSection, notify = false) {
   //Todo: make sure it all the time for example chemistry has 2 section atr
   const table = $("#timetable").find("tbody");
   const corIndex = selectedSection["course"];
@@ -259,7 +303,9 @@ export function addToTimetable(selectedSection) {
 
   const section = Variables.courses[corIndex]["sections"][secIndex];
   if (section["dayOfWeek"].length === 0) {
-    dangerAlert("تنويه", "هذه شعبة عن بعد <br> سيتم اضافتها في الاسفل", "حسنًا");
+    if (notify) {
+      dangerAlert("تنويه", "هذه شعبة عن بعد <br> سيتم اضافتها في الاسفل", "حسنًا");
+    }
     if ($("#onlineCourses").children().length == 0) {
       $("#onlineTitle").show();
       $("#onlineCourses").addClass("mb-10");
@@ -321,6 +367,8 @@ export function addToTimetable(selectedSection) {
       )
     );
   });
+
+  trimOverflowingTitle("section-" + secIndex);
   // timeCodes.push(parseInt(maxValue, 10));
   // timeCodes.sort(function (a, b) {
   //   return b - a;

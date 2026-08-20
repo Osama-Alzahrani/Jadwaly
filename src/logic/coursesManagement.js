@@ -77,6 +77,10 @@ export function clearTimetable() {
     $(this).removeAttr("style");
   });
 
+  $("#onlineCourses").empty().removeClass("mb-10");
+  $("#onlineTitle").hide();
+  $("#timetable").find("tbody").css("border-bottom-width", "");
+
   return ConflictStyles;
 }
 

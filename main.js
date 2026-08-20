@@ -285,8 +285,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", ".toggle-settings-btn", function () {
-    target = $(this).attr('target-toggle');
-    hideToggle = $(this).attr('hide-toggle');
+    const target = $(this).attr('target-toggle');
     const wrapper = document.getElementById(target);
 
 

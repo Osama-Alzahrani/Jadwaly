@@ -1,4 +1,5 @@
 import { Variables } from '../../src/shared/config/config.js';
+import t from '../../src/utils/myi18.js';
 //TODO: allow to make new modal so you can use more than one modal at time
 // `            <div class="sm:flex sm:items-start">
 //               <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">

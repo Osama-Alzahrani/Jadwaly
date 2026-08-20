@@ -1,6 +1,7 @@
-import { CustomModal,Custom_Colors, Custom_btn_ID  } from "../../assets/js/modal.js";
+import { CustomModal, Custom_Colors, dangerAlert } from "../../assets/js/modal.js";
 import { Variables } from "../shared/config/config.js";
 import { clearTimetable, removeFromCodeTimes } from "./coursesManagement.js";
+
 
 function addTableRow() {
   let table = $("#timetable").find("table");

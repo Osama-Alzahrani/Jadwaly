@@ -1,5 +1,5 @@
-import Course from "../Models/Course.js";
-import Section from "../Models/Section.js";
+import Course from "../Models/course.js";
+import Section from "../Models/section.js";
 import { Constant } from "../shared/config/constant.js";
 import { Variables } from "../shared/config/config.js";
 import { colors, TimeToMinutes } from "../utils/utils.js";
